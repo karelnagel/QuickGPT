@@ -3,14 +3,16 @@ import { IoIosSettings } from "react-icons/io";
 import { useFocus } from "../hooks/useFocus";
 import { useGPT } from "../hooks/useGPT";
 import { MessageType, useStore } from "../hooks/useStore";
-import ReactMarkdown from "react-markdown";
+import { Markdown } from "../components/Markdown";
+
 const Message = ({ content, role }: MessageType) => {
   return (
-    <div className={`prose text-zinc-200 ${role === "user" ? "text-right bg-zinc-600" : "text-left"}`}>
-      <ReactMarkdown>{content}</ReactMarkdown>
+    <div className={`${role === "user" ? "text-right bg-base-200" : "text-left"}`}>
+      <Markdown>{content}</Markdown>
     </div>
   );
 };
+
 export const Home = () => {
   const [input, setInput] = useState("");
   const messages = useStore((s) => s.messages);
@@ -27,20 +29,20 @@ export const Home = () => {
 
   return (
     <div className="h-screen flex flex-col justify-between w-screen">
-      <div className="flex justify-between bg-zinc-600 p-2 items-center">
+      <div className="flex justify-between  p-2 items-center">
         <p className="font-bold">Mac GPT</p>
         <IoIosSettings className="text-xl cursor-pointer" onClick={() => setScreen("settings")} />
       </div>
-      <div className="h-full overflow-auto px-2">
-        {messages.map((m) => (
-          <Message {...m} />
+      <div className="h-full overflow-auto px-2 flex flex-col-reverse">
+        {[...messages].reverse().map((m) => (
+          <Message key={m.id} {...m} />
         ))}
       </div>
       <form onSubmit={submit} className="w-full p-2 flex ">
         <button type="button" onClick={clearChat}>
           X
         </button>
-        <input ref={inputRef} value={input} onChange={(e) => setInput(e.currentTarget.value)} className="input resize-none h-10 w-full" />
+        <input ref={inputRef} value={input} onChange={(e) => setInput(e.currentTarget.value)} className="input" />
       </form>
     </div>
   );

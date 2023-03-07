@@ -4,8 +4,8 @@
 
 html,
 body {
-  @apply bg-zinc-800 rounded-xl overflow-hidden text-zinc-200;
+  @apply rounded-xl overflow-hidden;
 }
 .input {
-  @apply bg-zinc-600 rounded-lg p-2 focus:outline-none;
+  @apply bg-base-200 rounded-xl focus:outline-none w-full;
 }

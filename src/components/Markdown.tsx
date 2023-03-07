@@ -4,7 +4,7 @@ import { open } from "@tauri-apps/api/shell";
 export const Markdown = ({ children }: { children: string }) => {
   return (
     <ReactMarkdown
-      className="prose prose-sm sm:prose lg:prose-lg xl:prose-2xl"
+      className="prose max-w-full"
       components={{
         a: ({ href, children, className, style }) => {
           return (

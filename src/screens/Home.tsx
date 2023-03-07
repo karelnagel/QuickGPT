@@ -3,11 +3,11 @@ import { IoIosSettings } from "react-icons/io";
 import { useFocus } from "../hooks/useFocus";
 import { useGPT } from "../hooks/useGPT";
 import { MessageType, useStore } from "../hooks/useStore";
-
+import ReactMarkdown from "react-markdown";
 const Message = ({ content, role }: MessageType) => {
   return (
-    <div>
-      <p>{content}</p>
+    <div className={`prose text-zinc-200 ${role === "user" ? "text-right bg-zinc-600" : "text-left"}`}>
+      <ReactMarkdown>{content}</ReactMarkdown>
     </div>
   );
 };
@@ -24,14 +24,14 @@ export const Home = () => {
     setInput("");
     await call(input);
   };
-  
+
   return (
     <div className="h-screen flex flex-col justify-between w-screen">
       <div className="flex justify-between bg-zinc-600 p-2 items-center">
         <p className="font-bold">Mac GPT</p>
         <IoIosSettings className="text-xl cursor-pointer" onClick={() => setScreen("settings")} />
       </div>
-      <div className="h-full">
+      <div className="h-full overflow-auto px-2">
         {messages.map((m) => (
           <Message {...m} />
         ))}

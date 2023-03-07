@@ -18,14 +18,11 @@
       "menuOnLeftClick": false
     },
     "allowlist": {
-      "all": false,
       "shell": {
-        "all": false,
         "open": true
       },
-      "fs": {
-        "all": true,
-        "scope": ["**"]
+      "globalShortcut": {
+        "all": true
       }
     },
     "bundle": {

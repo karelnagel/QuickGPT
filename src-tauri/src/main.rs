@@ -25,6 +25,7 @@ fn main() {
     let website = CustomMenuItem::new("website".to_string(), "Website").accelerator("Cmd+W");
     let system_tray_menu = SystemTrayMenu::new().add_item(website).add_item(quit);
     tauri::Builder::default()
+        .setup(|app| Ok(app.set_activation_policy(tauri::ActivationPolicy::Accessory)))
         .plugin(tauri_plugin_positioner::init())
         .system_tray(SystemTray::new().with_menu(system_tray_menu))
         .on_system_tray_event(|app, event| {

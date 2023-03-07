@@ -5,6 +5,7 @@ import { useGPT } from "../hooks/useGPT";
 import { MessageType, useStore } from "../hooks/useStore";
 import { Markdown } from "../components/Markdown";
 import { VscDebugRestart } from "react-icons/vsc";
+import { open } from "@tauri-apps/api/shell";
 
 const Message = ({ content, role }: MessageType) => {
   return (
@@ -19,6 +20,7 @@ export const Home = () => {
   const messages = useStore((s) => s.messages);
   const setScreen = useStore((s) => s.setScreen);
   const clearChat = useStore((s) => s.clearChat);
+  const apiKey = useStore((s) => s.apiKey);
   const call = useGPT();
   const inputRef = useFocus();
 
@@ -27,10 +29,21 @@ export const Home = () => {
     setInput("");
     await call(input);
   };
-
+  if (!apiKey)
+    return (
+      <div className="flex flex-col items-center justify-center h-screen space-y-2">
+        <p>Please set your OpenAI API key in the settings.</p>
+        <button className="text-primary" onClick={() => open("https://platform.openai.com/account/api-keys")}>
+          You can make the OpenAI API key here
+        </button>
+        <button onClick={() => setScreen("settings")} className="btn btn-primary btn-sm">
+          Settings
+        </button>
+      </div>
+    );
   return (
     <div className="h-screen flex flex-col justify-between w-screen">
-      <div className="flex justify-between  p-2 items-center">
+      <div className="flex justify-between  p-2 items-center border-b border-base-content">
         <p className="font-bold">Mac GPT</p>
         <IoIosSettings className="text-xl cursor-pointer" onClick={() => setScreen("settings")} />
       </div>
@@ -40,7 +53,9 @@ export const Home = () => {
         ))}
       </div>
       <form onSubmit={submit} className="w-full p-2 flex space-x-2 items-center">
-        <VscDebugRestart className="aspect-square h-full shrink-0 w-[20px] text-error" onClick={clearChat} />
+        <button onClick={clearChat} type="button">
+          <VscDebugRestart className="aspect-square h-full shrink-0 w-[20px] text-error" />
+        </button>
         <input ref={inputRef} value={input} onChange={(e) => setInput(e.currentTarget.value)} className="input bg-base-300 input-sm" />
         <button type="submit">
           <SendIcon />

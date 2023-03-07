@@ -62,7 +62,12 @@ fn main() {
                         std::process::exit(0);
                     }
                     "website" => {
-                        open(&app.shell_scope(), "https://mac-gpt.github.io/", None).unwrap();
+                        open(
+                            &app.shell_scope(),
+                            "https://github.com/karelnagel/mac-gpt",
+                            None,
+                        )
+                        .unwrap();
                     }
                     "hide" => {
                         let window = app.get_window("main").unwrap();

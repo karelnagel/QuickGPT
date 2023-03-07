@@ -6,6 +6,7 @@ html,
 body {
   @apply rounded-xl overflow-hidden;
 }
-.input {
+.input,
+.textarea {
   @apply bg-base-200 rounded-xl focus:outline-none w-full;
 }

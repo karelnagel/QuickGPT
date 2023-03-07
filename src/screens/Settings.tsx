@@ -7,10 +7,27 @@ export const Settings = () => {
   const prompt = useStore((s) => s.prompt);
   const setPrompt = useStore((s) => s.setPrompt);
   return (
-    <div className="flex flex-col items-center ">
-      <input type="text" value={apiKey} onChange={(e) => setApiKey(e.target.value)} className="input" />
-      <input type="text" value={prompt} onChange={(e) => setPrompt(e.target.value)} className="input" />
-      <button onClick={() => setScreen("home")}>Back</button>
+    <div className="flex flex-col items-center space-y-2">
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+          <span className="label-text">OpenAI API key</span>
+        </label>
+        <input type="text" value={apiKey} onChange={(e) => setApiKey(e.target.value)} className="input" />
+      </div>
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+          <span className="label-text">Start prompt</span>
+        </label>
+        <textarea
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          className="textarea"
+          placeholder="Pretend that you are Elon Musk."
+        />
+      </div>
+      <button onClick={() => setScreen("home")} className="btn btn-primary btn-sm">
+        Save
+      </button>
     </div>
   );
 };

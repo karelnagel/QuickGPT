@@ -6,9 +6,13 @@ export type MessageType = {
   role: "user" | "assistant" | "system";
   content: string;
 };
-
+export type Screen = "home" | "settings";
 export type StoreType = {
   apiKey: string;
+  prompt: string;
+  setPrompt: (prompt: string) => void;
+  screen: Screen;
+  setScreen: (screen: Screen) => void;
   setApiKey: (apiKey: string) => void;
   messages: MessageType[];
   addMessage: (message: MessageType) => void;
@@ -19,6 +23,10 @@ export const useStore = create(
   persist<StoreType>(
     (set, get) => ({
       apiKey: "",
+      prompt: "",
+      setPrompt: (prompt) => set({ prompt }),
+      screen: "home",
+      setScreen: (screen) => set({ screen }),
       setApiKey: (apiKey) => set({ apiKey }),
       messages: [],
       addMessage: (message) => {

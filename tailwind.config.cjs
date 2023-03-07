@@ -10,7 +10,15 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        mytheme: {
+        light: {
+          primary: "#0084ff",
+          secondary: "#ff5778",
+          accent: "#37cdbe",
+          neutral: "#171b1e",
+          "base-100": "#ffffff",
+          "base-content": "#000000",
+        },
+        dark: {
           primary: "#0084ff",
           secondary: "#ff5778",
           accent: "#37cdbe",
@@ -19,6 +27,7 @@ module.exports = {
           "base-200": "#181818",
           "base-content": "#fff",
         },
+
       },
     ],
   },

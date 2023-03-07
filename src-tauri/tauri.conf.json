@@ -7,7 +7,7 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "macgpt",
+    "productName": "Mac GPT",
     "version": "0.0.0"
   },
   "tauri": {
@@ -33,7 +33,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "com.macgpt.dev",
       "targets": "all"
     },
     "security": {
@@ -46,9 +46,9 @@
       {
         "fullscreen": false,
         "height": 600,
-        "resizable": false,
+        "resizable": true,
         "title": "menubar",
-        "width": 600,
+        "width": 400,
         "visible": false,
         "hiddenTitle": true,
         "decorations": false,

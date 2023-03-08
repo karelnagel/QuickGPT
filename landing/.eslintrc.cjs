@@ -7,13 +7,13 @@ const config = {
       ],
       files: ["*.ts", "*.tsx"],
       parserOptions: {
-        project: "landing/tsconfig.json",
+        project: "tsconfig.json",
       },
     },
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: "./landing/tsconfig.json",
+    project: "./tsconfig.json",
   },
   plugins: ["@typescript-eslint"],
   extends: ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],

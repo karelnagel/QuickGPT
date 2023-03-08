@@ -29,18 +29,7 @@ export const Home = () => {
     setInput("");
     await call(input);
   };
-  if (!apiKey)
-    return (
-      <div className="flex flex-col items-center justify-center h-screen space-y-2">
-        <p>Please set your OpenAI API key in the settings.</p>
-        <button className="text-primary" onClick={() => open("https://platform.openai.com/account/api-keys")}>
-          You can make the OpenAI API key here
-        </button>
-        <button onClick={() => setScreen("settings")} className="btn btn-primary btn-sm">
-          Settings
-        </button>
-      </div>
-    );
+
   return (
     <div className="h-screen flex flex-col justify-between w-screen">
       <div className="flex justify-between  p-2 items-center border-b border-base-content">

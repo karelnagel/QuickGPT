@@ -67,6 +67,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.53.0
       '@typescript-eslint/parser': ^5.53.0
       autoprefixer: ^10.4.7
+      daisyui: ^2.51.3
       eslint: ^8.34.0
       eslint-config-next: ^13.2.1
       next: ^13.2.1
@@ -87,6 +88,7 @@ importers:
       '@trpc/next': 10.14.1_a5glilrd3qll2bi55yzywm2y4e
       '@trpc/react-query': 10.14.1_ldv44zvqpibs4fctxfwnszfeji
       '@trpc/server': 10.14.1
+      daisyui: 2.51.3_gbtt6ss3tbiz4yjtvdr6fbrj44
       next: 13.2.3_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0

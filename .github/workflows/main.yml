@@ -2,9 +2,7 @@ name: "publish"
 on:
   push:
     branches:
-      - "releases/**"
-    paths:
-      - "package.json"
+      - main
 jobs:
   create-release:
     permissions:

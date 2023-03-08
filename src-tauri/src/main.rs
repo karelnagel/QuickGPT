@@ -10,9 +10,6 @@ use tauri_plugin_positioner::{Position, WindowExt};
 
 #[tauri::command]
 fn toggle_window(window: tauri::Window) {
-    let position = Position::TrayCenter;
-    window.move_window(position).unwrap();
-
     if window.is_visible().unwrap() {
         window.hide().unwrap();
     } else {
@@ -41,6 +38,9 @@ fn main() {
                     ..
                 } => {
                     let window = app.get_window("main").unwrap();
+                    let position = Position::TrayCenter;
+                    window.move_window(position).unwrap();
+
                     toggle_window(window);
                 }
                 SystemTrayEvent::RightClick {

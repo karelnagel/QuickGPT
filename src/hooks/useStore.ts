@@ -10,6 +10,8 @@ export type Screen = "home" | "settings";
 export type StoreType = {
   apiKey: string;
   prompt: string;
+  shortcut: string;
+  setShortcut: (k: string) => void;
   setPrompt: (prompt: string) => void;
   screen: Screen;
   setScreen: (screen: Screen) => void;
@@ -22,6 +24,8 @@ export type StoreType = {
 export const useStore = create(
   persist<StoreType>(
     (set, get) => ({
+      shortcut: "CmdOrControl+Shift+G",
+      setShortcut: (key) => set({ shortcut: key }),
       apiKey: "",
       prompt: "",
       setPrompt: (prompt) => set({ prompt }),

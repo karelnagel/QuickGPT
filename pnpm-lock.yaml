@@ -1,48 +1,55 @@
 lockfileVersion: 5.4
 
-specifiers:
-  '@tailwindcss/typography': ^0.5.9
-  '@tauri-apps/api': ^1.2.0
-  '@tauri-apps/cli': ^1.2.2
-  '@types/node': ^18.7.10
-  '@types/react': ^18.0.15
-  '@types/react-dom': ^18.0.6
-  '@vitejs/plugin-react': ^3.0.0
-  autoprefixer: ^10.4.13
-  daisyui: ^2.51.3
-  postcss: ^8.4.21
-  react: ^18.2.0
-  react-dom: ^18.2.0
-  react-icons: ^4.8.0
-  react-markdown: ^8.0.5
-  tailwindcss: ^3.2.7
-  typescript: ^4.6.4
-  vite: ^4.0.0
-  zod: ^3.21.4
-  zustand: ^4.3.6
+importers:
 
-dependencies:
-  '@tauri-apps/api': 1.2.0
-  daisyui: 2.51.3_gbtt6ss3tbiz4yjtvdr6fbrj44
-  react: 18.2.0
-  react-dom: 18.2.0_react@18.2.0
-  react-icons: 4.8.0_react@18.2.0
-  react-markdown: 8.0.5_pmekkgnqduwlme35zpnqhenc34
-  zod: 3.21.4
-  zustand: 4.3.6_react@18.2.0
+  .:
+    specifiers:
+      turbo: ^1.8.3
+    dependencies:
+      turbo: 1.8.3
 
-devDependencies:
-  '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.7
-  '@tauri-apps/cli': 1.2.3
-  '@types/node': 18.14.6
-  '@types/react': 18.0.28
-  '@types/react-dom': 18.0.11
-  '@vitejs/plugin-react': 3.1.0_vite@4.1.4
-  autoprefixer: 10.4.13_postcss@8.4.21
-  postcss: 8.4.21
-  tailwindcss: 3.2.7_postcss@8.4.21
-  typescript: 4.9.5
-  vite: 4.1.4_@types+node@18.14.6
+  app:
+    specifiers:
+      '@tailwindcss/typography': ^0.5.9
+      '@tauri-apps/api': ^1.2.0
+      '@tauri-apps/cli': ^1.2.2
+      '@types/node': ^18.7.10
+      '@types/react': ^18.0.15
+      '@types/react-dom': ^18.0.6
+      '@vitejs/plugin-react': ^3.0.0
+      autoprefixer: ^10.4.13
+      daisyui: ^2.51.3
+      postcss: ^8.4.21
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      react-icons: ^4.8.0
+      react-markdown: ^8.0.5
+      tailwindcss: ^3.2.7
+      typescript: ^4.6.4
+      vite: ^4.0.0
+      zod: ^3.21.4
+      zustand: ^4.3.6
+    dependencies:
+      '@tauri-apps/api': 1.2.0
+      daisyui: 2.51.3_gbtt6ss3tbiz4yjtvdr6fbrj44
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-icons: 4.8.0_react@18.2.0
+      react-markdown: 8.0.5_pmekkgnqduwlme35zpnqhenc34
+      zod: 3.21.4
+      zustand: 4.3.6_react@18.2.0
+    devDependencies:
+      '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.7
+      '@tauri-apps/cli': 1.2.3
+      '@types/node': 18.14.6
+      '@types/react': 18.0.28
+      '@types/react-dom': 18.0.11
+      '@vitejs/plugin-react': 3.1.0_vite@4.1.4
+      autoprefixer: 10.4.13_postcss@8.4.21
+      postcss: 8.4.21
+      tailwindcss: 3.2.7_postcss@8.4.21
+      typescript: 4.9.5
+      vite: 4.1.4_@types+node@18.14.6
 
 packages:
 
@@ -1744,6 +1751,67 @@ packages:
 
   /trough/2.1.0:
     resolution: {integrity: sha512-AqTiAOLcj85xS7vQ8QkAV41hPDIJ71XJB4RCUrzo/1GM2CQwhkJGaf9Hgr7BOugMRpgGUrqRg/DrBDl4H40+8g==}
+    dev: false
+
+  /turbo-darwin-64/1.8.3:
+    resolution: {integrity: sha512-bLM084Wr17VAAY/EvCWj7+OwYHvI9s/NdsvlqGp8iT5HEYVimcornCHespgJS/yvZDfC+mX9EQkn3V2JmYgGGw==}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /turbo-darwin-arm64/1.8.3:
+    resolution: {integrity: sha512-4oZjXtzakopMK110kue3z/hqu3WLv+eDLZOX1NGdo49gqca9BeD8GbH+sXpAp6tqyeuzpss+PIliVYuyt7LgbA==}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /turbo-linux-64/1.8.3:
+    resolution: {integrity: sha512-uvX2VKotf5PU14FCxJA5iHItPQno2JWzerMd+g3/h/Asay6dvxvtVjc39MQeGT0H5njSvzVKFkT+3/5q8lgOEg==}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /turbo-linux-arm64/1.8.3:
+    resolution: {integrity: sha512-E1p+oH3XKMaPS4rqWhYsL4j2Pzc0d/9P5KU7Kn1kqVLo2T3iRA7n2KVULEieUNE0nTH+aIJPXYXOpqCI5wFJaA==}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /turbo-windows-64/1.8.3:
+    resolution: {integrity: sha512-cnzAytHtoLXd0J7aNzRpZFpL/GTjcBmkvAPlbOdf/Pl1iwS4qzGrudZQ+OM1lmLgLIfBPIavsGHBknTwTNib4A==}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /turbo-windows-arm64/1.8.3:
+    resolution: {integrity: sha512-ulIiItNm2w/zYJdD5/oAzjzNns1IjbpweRzpsE8tLXaWwo6+fnXXkyloUug0IUhcd2k6fJXfoiDZfygqpOVuXg==}
+    cpu: [arm64]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /turbo/1.8.3:
+    resolution: {integrity: sha512-zGrkU1EuNFmkq6iky6LcMqD4h0OLE8XysVFxQWRIZbcTNnf0XAycbsbeEyiJpiWeqb7qtg2bVuY9EYcNoNhVuQ==}
+    hasBin: true
+    requiresBuild: true
+    optionalDependencies:
+      turbo-darwin-64: 1.8.3
+      turbo-darwin-arm64: 1.8.3
+      turbo-linux-64: 1.8.3
+      turbo-linux-arm64: 1.8.3
+      turbo-windows-64: 1.8.3
+      turbo-windows-arm64: 1.8.3
     dev: false
 
   /typescript/4.9.5:

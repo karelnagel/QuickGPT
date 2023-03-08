@@ -5,8 +5,13 @@ import { useStore } from "./useStore";
 
 export const useShortcut = () => {
   const clearChat = useStore((s) => s.clearChat);
+  const nextPerson = useStore((s) => s.nextPerson);
+  const prevPerson = useStore((s) => s.prevPerson);
   const handleKeyDown = (e: KeyboardEvent) => {
-    if ((e.metaKey || e.ctrlKey) && (e.key === "Backspace" || e.key === "Delete")) clearChat();
+    const ctrl = e.metaKey || e.ctrlKey;
+    if (ctrl && (e.key === "Backspace" || e.key === "Delete")) clearChat();
+    if (ctrl && (e.key === "ArrowRight" || e.key === "ArrowDown")) nextPerson();
+    if (ctrl && (e.key === "ArrowLeft" || e.key === "ArrowUp")) prevPerson();
   };
   const shortcut = useStore((s) => s.shortcut);
   const set = async () => {

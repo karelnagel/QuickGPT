@@ -6,6 +6,7 @@ import { MessageType, useStore } from "../hooks/useStore";
 import { Markdown } from "../components/Markdown";
 import { VscDebugRestart } from "react-icons/vsc";
 import { open } from "@tauri-apps/api/shell";
+import { PersonalitySelect } from "../components/PersonalitySelect";
 
 const Message = ({ content, role }: MessageType) => {
   return (
@@ -33,7 +34,7 @@ export const Home = () => {
   return (
     <div className="h-screen flex flex-col justify-between w-screen">
       <div className="flex justify-between  p-2 items-center border-b border-base-content">
-        <p className="font-bold">DeskGPT</p>
+        <PersonalitySelect/>
         <IoIosSettings className="text-xl cursor-pointer" onClick={() => setScreen("settings")} />
       </div>
       <div className="h-full overflow-auto flex flex-col-reverse px-2">

@@ -3,7 +3,7 @@ import { Download } from "../components/Download";
 
 export default function Page() {
   return (
-    <div className="flex flex-col items-center justify-between md:flex-row">
+    <div className="flex w-full flex-col items-center justify-between md:flex-row">
       <div className="max-w-xl space-y-6">
         <h1 className="text-[54px] font-bold">ChatGPT in your PC</h1>
         <h2 className="text-xl">

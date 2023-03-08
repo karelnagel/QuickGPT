@@ -19,7 +19,7 @@ fn toggle_window(window: tauri::Window) {
 }
 fn main() {
     let quit = CustomMenuItem::new("quit".to_string(), "Quit").accelerator("Cmd+Q");
-    let website = CustomMenuItem::new("website".to_string(), "Website").accelerator("Cmd+W");
+    let website = CustomMenuItem::new("website".to_string(), "Go to the Website").accelerator("Cmd+W");
     let system_tray_menu = SystemTrayMenu::new().add_item(website).add_item(quit);
     tauri::Builder::default()
         .setup(|app| {

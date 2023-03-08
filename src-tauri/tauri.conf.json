@@ -54,7 +54,8 @@
         "hiddenTitle": true,
         "decorations": false,
         "focus": false,
-        "transparent": true
+        "transparent": true,
+        "alwaysOnTop": true
       }
     ]
   }

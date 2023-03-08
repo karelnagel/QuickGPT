@@ -44,7 +44,7 @@ export const Home = () => {
   return (
     <div className="h-screen flex flex-col justify-between w-screen">
       <div className="flex justify-between  p-2 items-center border-b border-base-content">
-        <p className="font-bold">Mac GPT</p>
+        <p className="font-bold">DeskGPT</p>
         <IoIosSettings className="text-xl cursor-pointer" onClick={() => setScreen("settings")} />
       </div>
       <div className="h-full overflow-auto flex flex-col-reverse px-2">

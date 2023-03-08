@@ -7,8 +7,8 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "Mac GPT",
-    "version": "0.0.0"
+    "productName": "DeskGPT",
+    "version": "0.0.2"
   },
   "tauri": {
     "macOSPrivateApi": true,
@@ -34,7 +34,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.macgpt.dev",
+      "identifier": "app.deskgpt",
       "targets": "all"
     },
     "security": {

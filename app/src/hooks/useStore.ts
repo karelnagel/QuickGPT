@@ -50,7 +50,7 @@ export const useStore = create(
       },
     }),
     {
-      name: "mac-gpt",
+      name: "deskgpt",
     }
   )
 );

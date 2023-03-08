@@ -1,4 +1,4 @@
-# Mac GPT 
+# [DeskGPT](https://deskgpt.vercel.app/)
  
  This is a native app for Mac, Windows and Linux that allows you to access ChatGPT fast and easily.
  
@@ -9,19 +9,19 @@
 
  It also has a prompt field so you can make it act a certain way.
 
- ![screenshot](https://raw.githubusercontent.com/karelnagel/mac-gpt/main/public/screenshot.png)
+ ![screenshot](https://raw.githubusercontent.com/karelnagel/deskgpt/main/app/public/screenshot.png)
 
 
 
 ## Installation
 
-[Mac](https://github.com/karelnagel/mac-gpt/releases/latest/download/Mac.GPT_0.0.0_x64.dmg)
+[Mac](https://github.com/karelnagel/deskgpt/releases/latest/download/Mac.GPT_0.0.0_x64.dmg)
 
-[Windows](https://github.com/karelnagel/mac-gpt/releases/latest/download/Mac.GPT_0.0.0_x64_en-US.msi)
+[Windows](https://github.com/karelnagel/deskgpt/releases/latest/download/Mac.GPT_0.0.0_x64_en-US.msi)
 
-[Linux](https://github.com/karelnagel/mac-gpt/releases/latest)
+[Linux](https://github.com/karelnagel/deskgpt/releases/latest)
 
-[All latest release files](https://github.com/karelnagel/mac-gpt/releases/latest)
+[All latest release files](https://github.com/karelnagel/deskgpt/releases/latest)
 
  
 ## Why

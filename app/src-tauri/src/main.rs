@@ -64,7 +64,7 @@ fn main() {
                     "website" => {
                         open(
                             &app.shell_scope(),
-                            "https://github.com/karelnagel/mac-gpt",
+                            "https://github.com/karelnagel/deskgpt",
                             None,
                         )
                         .unwrap();

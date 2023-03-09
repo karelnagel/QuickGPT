@@ -19,7 +19,7 @@ export const useGPT = () => {
     let result = "";
     addMessage({ content: message, role: "user", id: getRandomId() });
     addMessage({ id, role: "assistant", content: "" });
-    const messages = [{ role: "system", content: prompt }, ...Message.array().parse(chat), { role: "user", content: message }];
+    const messages = [{ role: "user", content: prompt }, ...Message.array().parse(chat), { role: "user", content: message }];
 
     const url = apiKey ? "https://api.openai.com/v1/chat/completions" : import.meta.env.VITE_API_URL;
     const res = await fetch(url, {

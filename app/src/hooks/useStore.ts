@@ -18,25 +18,30 @@ export type Personality = {
 
 export type StoreType = {
   apiKey: string;
+  setApiKey: (apiKey: string) => void;
+
   position: Position;
   setPosition: (position: Position) => void;
+
   shortcut: string;
-  currentPersonality: string;
-  setCurrentPersonality: (id: string) => void;
-  personalities: Personality[];
+  setShortcut: (k: string) => void;
+
+  currentPersonId: string;
+  setCurrentPersonId: (id: string) => void;
+  persons: Personality[];
   nextPerson: () => void;
   prevPerson: () => void;
-  addPersonality: (personality: Personality) => void;
-  removePersonality: (id: string) => void;
-  editPersonality: (personality: Personality) => void;
-  setShortcut: (k: string) => void;
+  addPerson: (personality: Personality) => void;
+  removePerson: (id: string) => void;
+  editPerson: (personality: Personality) => void;
+
   screen: Screen;
   setScreen: (screen: Screen) => void;
-  setApiKey: (apiKey: string) => void;
+
   messages: MessageType[];
   addMessage: (message: MessageType) => void;
   editMessage: (message: MessageType) => void;
-  clearChat: () => void;
+  clearMessages: () => void;
 };
 
 export const useStore = create(
@@ -44,44 +49,49 @@ export const useStore = create(
     (set, get) => ({
       position: Position.TrayCenter,
       setPosition: (position) => set({ position }),
-      personalities: defaultPersonalities,
-      currentPersonality: "default",
-      setCurrentPersonality: (id) => set({ currentPersonality: id }),
-      addPersonality: (personality) => {
+
+      persons: defaultPersonalities,
+      currentPersonId: "default",
+      setCurrentPersonId: (id) => set({ currentPersonId: id }),
+      addPerson: (personality) => {
         set((state) => ({
-          personalities: [...state.personalities, personality],
-          currentPersonality: personality.id,
+          persons: [...state.persons, personality],
+          currentPersonId: personality.id,
         }));
       },
-      removePersonality: (id) => {
+      removePerson: (id) => {
         set((state) => ({
-          personalities: state.personalities.filter((p) => p.id !== id),
-          currentPersonality: state.personalities[0].id,
+          persons: state.persons.filter((p) => p.id !== id),
+          currentPersonId: state.persons[0].id,
         }));
       },
-      editPersonality: (personality) => {
+      editPerson: (personality) => {
         set((state) => ({
-          personalities: state.personalities.map((p) => (p.id === personality.id ? personality : p)),
+          persons: state.persons.map((p) => (p.id === personality.id ? personality : p)),
         }));
       },
       nextPerson: () => {
-        const { personalities, currentPersonality } = get();
+        const { persons: personalities, currentPersonId: currentPersonality } = get();
         const currentIndex = personalities.findIndex((p) => p.id === currentPersonality);
         const nextIndex = (currentIndex + 1) % personalities.length;
-        set({ currentPersonality: personalities[nextIndex].id });
+        set({ currentPersonId: personalities[nextIndex].id });
       },
       prevPerson: () => {
-        const { personalities, currentPersonality } = get();
+        const { persons: personalities, currentPersonId: currentPersonality } = get();
         const currentIndex = personalities.findIndex((p) => p.id === currentPersonality);
         const nextIndex = (currentIndex - 1 + personalities.length) % personalities.length;
-        set({ currentPersonality: personalities[nextIndex].id });
+        set({ currentPersonId: personalities[nextIndex].id });
       },
+
       shortcut: "CmdOrControl+Shift+G",
       setShortcut: (key) => set({ shortcut: key }),
+
       apiKey: "",
+      setApiKey: (apiKey) => set({ apiKey }),
+
       screen: "home",
       setScreen: (screen) => set({ screen }),
-      setApiKey: (apiKey) => set({ apiKey }),
+
       messages: [],
       addMessage: (message) => {
         set((state) => ({
@@ -93,7 +103,7 @@ export const useStore = create(
           messages: state.messages.map((m) => (m.id === message.id ? message : m)),
         }));
       },
-      clearChat: () => {
+      clearMessages: () => {
         set((state) => ({
           messages: [],
         }));

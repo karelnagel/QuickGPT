@@ -4,7 +4,7 @@ import { invoke } from "@tauri-apps/api/tauri";
 import { useStore } from "./useStore";
 
 export const useShortcut = () => {
-  const clearChat = useStore((s) => s.clearChat);
+  const clearChat = useStore((s) => s.clearMessages);
   const nextPerson = useStore((s) => s.nextPerson);
   const prevPerson = useStore((s) => s.prevPerson);
   const handleKeyDown = (e: KeyboardEvent) => {

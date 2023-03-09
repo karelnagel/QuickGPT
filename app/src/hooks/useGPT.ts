@@ -10,7 +10,7 @@ const Message = z.object({
 export const useGPT = () => {
   const apiKey = useStore((s) => s.apiKey);
   const chat = useStore((s) => s.messages);
-  const prompt = useStore((s) => s.personalities.find((p) => p.id === s.currentPersonality)?.prompt || "");
+  const prompt = useStore((s) => s.persons.find((p) => p.id === s.currentPersonId)?.prompt || "");
   const addMessage = useStore((s) => s.addMessage);
   const editMessage = useStore((s) => s.editMessage);
 

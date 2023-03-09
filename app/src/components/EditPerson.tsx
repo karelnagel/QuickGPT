@@ -3,9 +3,9 @@ import { useStore } from "../hooks/useStore";
 import { PersonalitySelect } from "./PersonalitySelect";
 
 export const EditPerson = () => {
-  const person = useStore((s) => s.personalities.find((p) => p.id === s.currentPersonality));
-  const setPerson = useStore((s) => s.editPersonality);
-  const newPerson = useStore((s) => s.addPersonality);
+  const person = useStore((s) => s.persons.find((p) => p.id === s.currentPersonId));
+  const setPerson = useStore((s) => s.editPerson);
+  const newPerson = useStore((s) => s.addPerson);
   return (
     <div className="space-y-2">
       <p>Edit personalities</p>

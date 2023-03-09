@@ -1,10 +1,10 @@
 import { useStore } from "../hooks/useStore";
 
 export const PersonalitySelect = () => {
-  const personalities = useStore((s) => s.personalities);
-  const selected = useStore((s) => s.currentPersonality);
+  const personalities = useStore((s) => s.persons);
+  const selected = useStore((s) => s.currentPersonId);
   const personality = personalities.find((p) => p.id === selected);
-  const setPersonality = useStore((s) => s.setCurrentPersonality);
+  const setPersonality = useStore((s) => s.setCurrentPersonId);
   return (
     <div className="dropdown">
       <label tabIndex={0} className="btn btn-sm btn-primary">

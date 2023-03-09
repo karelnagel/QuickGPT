@@ -20,7 +20,7 @@ export const Home = () => {
   const [input, setInput] = useState("");
   const messages = useStore((s) => s.messages);
   const setScreen = useStore((s) => s.setScreen);
-  const clearChat = useStore((s) => s.clearChat);
+  const clearChat = useStore((s) => s.clearMessages);
   const apiKey = useStore((s) => s.apiKey);
   const call = useGPT();
   const inputRef = useFocus();
@@ -34,7 +34,7 @@ export const Home = () => {
   return (
     <div className="h-screen flex flex-col justify-between w-screen">
       <div className="flex justify-between  p-2 items-center border-b border-base-content">
-        <PersonalitySelect/>
+        <PersonalitySelect />
         <IoIosSettings className="text-xl cursor-pointer" onClick={() => setScreen("settings")} />
       </div>
       <div className="h-full overflow-auto flex flex-col-reverse px-2">

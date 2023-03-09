@@ -1,7 +1,7 @@
 import { Position } from "tauri-plugin-positioner-api";
 import { EditPerson } from "../components/EditPerson";
 import { isValidKey, StringIsNumber } from "../helpers";
-import { useStore } from "../hooks/useStore";
+import { TextSize, useStore } from "../hooks/useStore";
 
 export const Settings = () => {
   const apiKey = useStore((s) => s.apiKey);
@@ -11,9 +11,11 @@ export const Settings = () => {
   const setScreen = useStore((s) => s.setScreen);
   const postion = useStore((s) => s.position);
   const setPosition = useStore((s) => s.setPosition);
+  const textSize = useStore((s) => s.textSize);
+  const setTextSize = useStore((s) => s.setTextSize);
 
   return (
-    <div className="flex flex-col items-center space-y-2 w-full max-w-xs m-auto">
+    <div className="flex flex-col items-center space-y-2 w-full max-w-xs m-auto px-2 overflow-auto h-full rounded-lg">
       <div className="form-control w-full">
         <label className="label">
           <span className="label-text">OpenAI API key</span>
@@ -30,6 +32,18 @@ export const Settings = () => {
           <span className="label-text">Shortcut</span>
         </label>
         <input type="text" value={shortcut} onChange={(e) => setShortcut(e.target.value)} className="input" placeholder="CmdOrControl+Shift+G" />
+      </div>
+      <div className="form-control w-full">
+        <label className="label">
+          <span className="label-text">Text Size</span>
+        </label>
+        <select value={textSize} onChange={(e) => setTextSize(e.target.value as TextSize)} className="select">
+          {Object.entries(TextSize).map(([key, value]) => (
+            <option key={key} value={key}>
+              {value}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="form-control w-full">
         <label className="label">

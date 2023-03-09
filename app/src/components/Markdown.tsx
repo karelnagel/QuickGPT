@@ -1,10 +1,12 @@
 import ReactMarkdown from "react-markdown";
 import { open } from "@tauri-apps/api/shell";
+import { useStore } from "../hooks/useStore";
 
 export const Markdown = ({ children }: { children: string }) => {
+  const textSize = useStore((s) => s.textSize);
   return (
     <ReactMarkdown
-      className="prose max-w-full"
+      className={`prose ${textSize} max-w-full`}
       components={{
         a: ({ href, children, className, style }) => {
           return (

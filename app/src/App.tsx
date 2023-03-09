@@ -10,8 +10,10 @@ export default function App() {
   useTheme();
   useShortcut();
   useWindowPosition();
-
-  if (screen === "home") return <Home />;
-  if (screen === "settings") return <Settings />;
-  return null;
+  return (
+    <div className="rounded-xl overflow-hidden bg-base-100 h-screen w-screen">
+      {screen === "home" && <Home />}
+      {screen === "settings" && <Settings />}
+    </div>
+  );
 }

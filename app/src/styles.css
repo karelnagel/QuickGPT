@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply rounded-xl overflow-hidden;
+  @apply !bg-transparent;
 }
 .input,
 .textarea,

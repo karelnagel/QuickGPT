@@ -15,8 +15,21 @@ export type Personality = {
   image?: string;
   prompt?: string;
 };
+export const TextSize = {
+  "text-xs": "XS",
+  "text-sm": "S",
+  "text-base": "M",
+  "text-lg": "L",
+  "text-xl": "XL",
+  "text-2xl": "2XL",
+  "text-3xl": "3XL",
+};
+export type TextSize = keyof typeof TextSize;
 
 export type StoreType = {
+  textSize: TextSize;
+  setTextSize: (size: TextSize) => void;
+
   apiKey: string;
   setApiKey: (apiKey: string) => void;
 
@@ -48,6 +61,9 @@ export type StoreType = {
 export const useStore = create(
   persist<StoreType>(
     (set, get) => ({
+      textSize: "text-base",
+      setTextSize: (size) => set({ textSize: size }),
+
       position: Position.TrayCenter,
       setPosition: (position) => set({ position }),
 

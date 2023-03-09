@@ -34,6 +34,7 @@ export type StoreType = {
   addPerson: (personality: Personality) => void;
   removePerson: (id: string) => void;
   editPerson: (personality: Personality) => void;
+  resetPersons: () => void;
 
   screen: Screen;
   setScreen: (screen: Screen) => void;
@@ -81,6 +82,9 @@ export const useStore = create(
         const currentIndex = personalities.findIndex((p) => p.id === currentPersonality);
         const nextIndex = (currentIndex - 1 + personalities.length) % personalities.length;
         set({ currentPersonId: personalities[nextIndex].id });
+      },
+      resetPersons: () => {
+        set({ persons: defaultPersonalities, currentPersonId: "default" });
       },
 
       shortcut: "CmdOrControl+Shift+G",

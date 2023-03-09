@@ -6,6 +6,7 @@
 use tauri::{
     api::shell::open, CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu,
 };
+use tauri_plugin_positioner::{Position, WindowExt};
 
 #[tauri::command]
 fn toggle_window(window: tauri::Window) {
@@ -38,6 +39,8 @@ fn main() {
                     ..
                 } => {
                     let window = app.get_window("main").unwrap();
+                    #[cfg(target_os = "macos")]
+                    window.move_window(Position::TrayCenter).unwrap();
                     toggle_window(window);
                 }
                 SystemTrayEvent::RightClick {

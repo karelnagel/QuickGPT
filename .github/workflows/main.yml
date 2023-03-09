@@ -56,6 +56,9 @@ jobs:
           version: 6.0.2
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
+      - name: add mac targets
+        if: matrix.platform == 'macos-latest'
+        run: rustup target add x86_64-apple-darwin aarch64-apple-darwin
       - name: install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-20.04'
         run: |
@@ -67,7 +70,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: --target universal-apple-darwin
+          args: ${{ matrix.platform == 'macos-latest' && '--target universal-apple-darwin' || '' }}
           releaseId: ${{ needs.create-release.outputs.release_id }}
 
   publish-release:

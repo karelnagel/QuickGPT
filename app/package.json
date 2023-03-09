@@ -1,8 +1,9 @@
 {
-  "name": "deskgpt",
+  "name": "deskgpt-app",
   "private": true,
   "version": "0.0.9",
   "type": "module",
+  "main": "./src/App.tsx",
   "scripts": {
     "dev": "tauri dev",
     "build": "tauri build",

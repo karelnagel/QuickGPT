@@ -10,6 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "deskgpt-app":"*",
     "@mdx-js/loader": "^2.3.0",
     "@next/mdx": "^13.2.3",
     "@prisma/client": "^4.9.0",

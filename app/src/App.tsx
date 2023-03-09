@@ -1,4 +1,5 @@
 import { Tabs } from "./components/Tabs";
+import { useIsClient } from "./hooks/useIsClient";
 import { useShortcut } from "./hooks/useShortcut";
 import { useStore } from "./hooks/useStore";
 import { useTheme } from "./hooks/useTheme";
@@ -12,6 +13,8 @@ export default function App() {
   useTheme();
   useShortcut();
   useWindowPosition();
+  const isCLient = useIsClient();
+  if (!isCLient) return <div>Loading...</div>;
   return (
     <div className="rounded-xl overflow-hidden bg-base-100 h-screen w-screen flex flex-col">
       <Tabs />

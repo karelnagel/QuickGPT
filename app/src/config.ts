@@ -1,4 +1,4 @@
-import { Personality } from "./hooks/useStore";
+import { MessageType, Personality } from "./hooks/useStore";
 
 export const defaultPrompt = (name?: string) =>
   name
@@ -8,9 +8,9 @@ export const defaultPrompt = (name?: string) =>
 export const defaultPersonImage = "/persons/chatgpt.svg";
 export const defaultPersonalities: Personality[] = [
   {
-    id: "default",
-    name: "Default",
-    prompt: "You are an AI assistant and have to answer the user's questions. You can use markdown to format your answers.",
+    id: "jesus",
+    name: "Jesus Christ",
+    image: "/persons/jesus.jpeg",
   },
   {
     id: "elon",
@@ -18,8 +18,26 @@ export const defaultPersonalities: Personality[] = [
     image: "/persons/elon.jpg",
   },
   {
+    id: "barack",
+    name: "Barack Obama",
+    image: "/persons/barack.jpg",
+  },
+  {
     id: "davinci",
     name: "Leonardo Da Vinci",
     image: "/persons/leonardo.jpeg",
+  },
+];
+
+export const startMessages: MessageType[] = [
+  {
+    id: "1",
+    content: "Hi!",
+    role: "user",
+  },
+  {
+    id: "2",
+    content: "Peace be with you, my dear one. How may I serve you today?",
+    role: "assistant",
   },
 ];

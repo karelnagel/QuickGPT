@@ -2,8 +2,9 @@ import { Position } from "tauri-plugin-positioner-api";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { Tab } from "../components/Tabs";
-import { defaultPersonalities } from "../config";
+import { defaultPersonalities, startMessages } from "../config";
 
+const defaultPerson = (defaultPersonalities as any)[0].id;
 export type MessageType = {
   id: string;
   role: "user" | "assistant" | "system";
@@ -80,7 +81,7 @@ export const useStore = create(
       setPosition: (position) => set({ position }),
 
       persons: defaultPersonalities,
-      currentPersonId: "default",
+      currentPersonId: defaultPerson,
       setCurrentPersonId: (id) => set({ currentPersonId: id }),
       addPerson: (personality) => {
         set((state) => ({
@@ -107,16 +108,16 @@ export const useStore = create(
         const { persons: personalities, currentPersonId: currentPersonality } = get();
         const currentIndex = personalities.findIndex((p) => p.id === currentPersonality);
         const nextIndex = (currentIndex + 1) % personalities.length;
-        set({ currentPersonId: personalities[nextIndex].id });
+        set({ currentPersonId: (personalities as any)[nextIndex].id });
       },
       prevPerson: () => {
         const { persons: personalities, currentPersonId: currentPersonality } = get();
         const currentIndex = personalities.findIndex((p) => p.id === currentPersonality);
         const nextIndex = (currentIndex - 1 + personalities.length) % personalities.length;
-        set({ currentPersonId: personalities[nextIndex].id });
+        set({ currentPersonId: (personalities as any)[nextIndex].id });
       },
       resetPersons: () => {
-        set({ persons: defaultPersonalities, currentPersonId: "default" });
+        set({ persons: defaultPersonalities, currentPersonId: defaultPerson });
       },
 
       shortcut: "CmdOrControl+Shift+G",
@@ -125,7 +126,7 @@ export const useStore = create(
       apiKey: "",
       setApiKey: (apiKey) => set({ apiKey }),
 
-      messages: [],
+      messages: startMessages,
       addMessage: (message) => {
         set((state) => ({
           messages: [...state.messages, message],

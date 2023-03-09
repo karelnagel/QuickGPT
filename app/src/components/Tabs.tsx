@@ -24,7 +24,7 @@ export const Tabs = () => {
                 key={p.id}
                 onClick={() => setPersonality(p.id)}
                 className={`cursor-pointer flex items-center space-x-1 px-1 py-1 ${
-                  p.id === person.id ? "bg-primary" : "hover:bg-primary hover:bg-opacity-40"
+                  p.id === person?.id ? "bg-primary" : "hover:bg-primary hover:bg-opacity-40"
                 }`}
               >
                 <img src={p.image || defaultPersonImage} alt={p.name} className="h-6 w-6 object-cover rounded-full" />

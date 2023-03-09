@@ -12,6 +12,7 @@ const config = {
   experimental: {
     appDir: true
   },
+  transpilePackages: ["deskgpt-app"],
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   async headers() {
     return [
@@ -28,4 +29,4 @@ const config = {
 };
 
 const withMDX = require('@next/mdx')()
-module.exports= withMDX(config)
+module.exports = withMDX(config)

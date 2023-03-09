@@ -1,5 +1,6 @@
 import { github } from "~/config";
-import { Download } from "../components/Download";
+import { Download } from "~/components/Download";
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -22,14 +23,15 @@ export default function Page() {
           </a>
         </div>
       </div>
-      <div className="py-16">
-        <video
-          src={"/recording.mov"}
-          autoPlay
-          muted
-          loop
-          className="w-96 rounded-xl "
+      <div className="my-16 h-[550px] w-[350px] shrink-0">
+        <iframe
+          src="/app"
+          className=" h-full w-full rounded-xl border border-primary"
+          title="app"
         />
+        <Link href="/app" className="text-sm">
+          Open in fullscreen
+        </Link>
       </div>
     </div>
   );

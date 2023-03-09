@@ -1,7 +1,10 @@
+const path = require('path');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx}",
+    path.join(path.dirname(require.resolve('deskgpt-app')), '**/*.{js,ts,jsx,tsx,html}'),
   ],
   theme: {
     extend: {},

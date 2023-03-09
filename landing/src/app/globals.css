@@ -5,3 +5,9 @@
 code {
   @apply italic text-primary;
 }
+
+.input,
+.textarea,
+.select {
+  @apply w-full rounded-xl bg-base-200 focus:outline-none;
+}

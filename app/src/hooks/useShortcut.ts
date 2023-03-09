@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { isRegistered, register } from "@tauri-apps/api/globalShortcut";
 import { invoke } from "@tauri-apps/api/tauri";
 import { useStore } from "./useStore";
+import { isTauri } from "../helpers";
 
 export const useShortcut = () => {
   const clearChat = useStore((s) => s.clearMessages);
@@ -18,14 +19,18 @@ export const useShortcut = () => {
     if (ctrl && e.key === "ArrowLeft") prevTab();
   };
   const shortcut = useStore((s) => s.shortcut);
-  const set = async () => {
-    if (await isRegistered(shortcut)) return;
 
-    await register(shortcut, async () => {
-      await invoke("toggle_window");
-    });
-  };
-  useEffect(() => void set(), [shortcut]);
+  useEffect(() => {
+    const set = async () => {
+      if (!isTauri()) return;
+      if (await isRegistered(shortcut)) return;
+
+      await register(shortcut, async () => {
+        await invoke("toggle_window");
+      });
+    };
+    set();
+  }, [shortcut]);
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     return () => {

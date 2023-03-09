@@ -50,10 +50,10 @@
         "resizable": true,
         "title": "menubar",
         "width": 400,
-        "visible": false,
+        "visible": true,
         "hiddenTitle": true,
         "decorations": false,
-        "focus": false,
+        "focus": true,
         "transparent": true,
         "alwaysOnTop": true
       }

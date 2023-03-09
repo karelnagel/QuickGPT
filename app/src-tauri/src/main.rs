@@ -6,7 +6,6 @@
 use tauri::{
     api::shell::open, CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu,
 };
-use tauri_plugin_positioner::{Position, WindowExt};
 
 #[tauri::command]
 fn toggle_window(window: tauri::Window) {
@@ -19,7 +18,8 @@ fn toggle_window(window: tauri::Window) {
 }
 fn main() {
     let quit = CustomMenuItem::new("quit".to_string(), "Quit").accelerator("Cmd+Q");
-    let website = CustomMenuItem::new("website".to_string(), "Go to the Website").accelerator("Cmd+W");
+    let website =
+        CustomMenuItem::new("website".to_string(), "Go to the Website").accelerator("Cmd+W");
     let system_tray_menu = SystemTrayMenu::new().add_item(website).add_item(quit);
     tauri::Builder::default()
         .setup(|app| {
@@ -38,9 +38,6 @@ fn main() {
                     ..
                 } => {
                     let window = app.get_window("main").unwrap();
-                    let position = Position::TrayCenter;
-                    window.move_window(position).unwrap();
-
                     toggle_window(window);
                 }
                 SystemTrayEvent::RightClick {
@@ -88,6 +85,12 @@ fn main() {
             _ => {}
         })
         .invoke_handler(tauri::generate_handler![toggle_window])
-        .run(tauri::generate_context!())
-        .expect("error while running tauri application");
+        .build(tauri::generate_context!())
+        .expect("error while running tauri application")
+        .run(|_app_handle, event| match event {
+            tauri::RunEvent::ExitRequested { api, .. } => {
+                api.prevent_exit();
+            }
+            _ => {}
+        });
 }

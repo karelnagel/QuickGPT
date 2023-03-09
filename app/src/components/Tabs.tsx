@@ -14,11 +14,11 @@ export const Tabs = () => {
     <div className="tabs tabs-boxed w-full grid grid-cols-3 shrink-0">
       <div className={`tab p-0 w-full cursor-pointer ${tab === "chat" ? "tab-active" : "hover:bg-base-100"}`}>
         <div className="dropdown dropdown-hover w-full ">
-          <label tabIndex={0} onClick={() => setTab("chat")} className="flex items-center space-x-2 border-primary cursor-pointer w-full px-2">
+          <label tabIndex={0} onClick={() => setTab("chat")} className="flex items-center space-x-2 cursor-pointer w-full px-2">
             {person && <img src={person.image || defaultPersonImage} className="h-6 aspect-square object-cover rounded-full shrink-0" />}
             <p className=" whitespace-nowrap overflow-hidden">{person?.id ? person?.name : "No Persons"}</p>
           </label>
-          <ul tabIndex={0} className="dropdown-content rounded-lg overflow-hidden w-full bg-base-300">
+          <ul tabIndex={0} className="dropdown-content rounded-lg overflow-hidden w-full bg-base-300 text-base-content">
             {persons.map((p) => (
               <li
                 key={p.id}
@@ -34,10 +34,10 @@ export const Tabs = () => {
           </ul>
         </div>
       </div>
-      <div onClick={() => setTab("persons")} className={`tab w-full cursor-pointer ${tab === "persons" ? "tab-active" : ""}`}>
+      <div onClick={() => setTab("persons")} className={`tab w-full cursor-pointer ${tab === "persons" ? "tab-active" : "hover:bg-base-100"}`}>
         Edit
       </div>
-      <div onClick={() => setTab("settings")} className={`tab w-full cursor-pointer ${tab === "settings" ? "tab-active" : ""}`}>
+      <div onClick={() => setTab("settings")} className={`tab w-full cursor-pointer ${tab === "settings" ? "tab-active" : "hover:bg-base-100"}`}>
         Settings
       </div>
     </div>

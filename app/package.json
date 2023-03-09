@@ -1,7 +1,7 @@
 {
   "name": "deskgpt-app",
   "private": true,
-  "version": "0.0.10",
+  "version": "0.0.11",
   "type": "module",
   "main": "./src/App.tsx",
   "scripts": {

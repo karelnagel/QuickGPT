@@ -1,6 +1,7 @@
 import { useStore } from "./useStore";
 import z from "zod";
 import { getRandomId } from "../helpers";
+import { defaultPrompt } from "../config";
 
 const Message = z.object({
   content: z.string(),
@@ -10,7 +11,7 @@ const Message = z.object({
 export const useGPT = () => {
   const apiKey = useStore((s) => s.apiKey);
   const chat = useStore((s) => s.messages);
-  const prompt = useStore((s) => s.persons.find((p) => p.id === s.currentPersonId)?.prompt || "");
+  const person = useStore((s) => s.persons.find((p) => p.id === s.currentPersonId));
   const addMessage = useStore((s) => s.addMessage);
   const editMessage = useStore((s) => s.editMessage);
 
@@ -19,7 +20,11 @@ export const useGPT = () => {
     let result = "";
     addMessage({ content: message, role: "user", id: getRandomId() });
     addMessage({ id, role: "assistant", content: "" });
-    const messages = [{ role: "user", content: prompt }, ...Message.array().parse(chat), { role: "user", content: message }];
+    const messages = [
+      { role: "user", content: person?.prompt || defaultPrompt(person?.name) },
+      ...Message.array().parse(chat),
+      { role: "user", content: message },
+    ];
 
     const url = apiKey ? "https://api.openai.com/v1/chat/completions" : import.meta.env.VITE_API_URL;
     const res = await fetch(url, {

@@ -13,7 +13,7 @@ export type Personality = {
   id: string;
   name: string;
   image?: string;
-  prompt: string;
+  prompt?: string;
 };
 
 export type StoreType = {
@@ -61,10 +61,13 @@ export const useStore = create(
         }));
       },
       removePerson: (id) => {
-        set((state) => ({
-          persons: state.persons.filter((p) => p.id !== id),
-          currentPersonId: state.persons[0].id,
-        }));
+        set((state) => {
+          const persons = state.persons.filter((p) => p.id !== id);
+          return {
+            persons: persons,
+            currentPersonId: persons[0]?.id,
+          };
+        });
       },
       editPerson: (personality) => {
         set((state) => ({

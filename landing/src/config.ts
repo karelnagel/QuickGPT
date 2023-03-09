@@ -5,15 +5,15 @@ export const github = "https://github.com/karelnagel/deskgpt";
 
 export const links: { [key in Device]: { url: string; title: string } } = {
   mac: {
-    url: "https://github.com/karelnagel/deskgpt/releases/latest/download/DeskGPT.app.tar.gz",
+    url: "https://github.com/karelnagel/deskgpt/releases/latest/download/DeskGPT.dmg",
     title: "Download For Mac",
   },
   windows: {
-    url: "https://github.com/karelnagel/deskgpt/releases/latest/download/DeskGPT_0.0.0_x64_en-US.msi",
+    url: "https://github.com/karelnagel/deskgpt/releases/latest/download/DeskGPT.msi",
     title: "Download For Windows",
   },
   linux: {
-    url: "https://github.com/karelnagel/deskgpt/releases/latest/download/DeskGPT.0.0_amd64.deb",
+    url: "https://github.com/karelnagel/deskgpt/releases/latest/download/DeskGPT.deb",
     title: "Download For Linux",
   },
   other: {

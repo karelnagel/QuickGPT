@@ -1,6 +1,7 @@
 import { Position } from "tauri-plugin-positioner-api";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { Tab } from "../components/Tabs";
 import { defaultPersonalities } from "../config";
 
 export type MessageType = {
@@ -27,6 +28,11 @@ export const TextSize = {
 export type TextSize = keyof typeof TextSize;
 
 export type StoreType = {
+  tab: Tab;
+  setTab: (tab: Tab) => void;
+  nextTab: () => void;
+  prevTab: () => void;
+
   textSize: TextSize;
   setTextSize: (size: TextSize) => void;
 
@@ -49,18 +55,24 @@ export type StoreType = {
   editPerson: (personality: Personality) => void;
   resetPersons: () => void;
 
-  screen: Screen;
-  setScreen: (screen: Screen) => void;
-
   messages: MessageType[];
   addMessage: (message: MessageType) => void;
   editMessage: (message: MessageType) => void;
   clearMessages: () => void;
 };
-
+const tabs: Tab[] = ["chat", "persons", "settings"];
 export const useStore = create(
   persist<StoreType>(
     (set, get) => ({
+      tab: "chat",
+      setTab: (tab) => set({ tab }),
+      nextTab: () => {
+        set((s) => ({ tab: tabs[(tabs.indexOf(s.tab) + 1) % tabs.length] }));
+      },
+      prevTab: () => {
+        set((s) => ({ tab: tabs[(tabs.indexOf(s.tab) - 1 + tabs.length) % tabs.length] }));
+      },
+
       textSize: "text-base",
       setTextSize: (size) => set({ textSize: size }),
 
@@ -78,7 +90,8 @@ export const useStore = create(
       },
       removePerson: (id) => {
         set((state) => {
-          const persons = state.persons.filter((p) => p.id !== id);
+          let persons = state.persons.filter((p) => p.id !== id);
+          if (persons.length === 0) persons = defaultPersonalities;
           return {
             persons: persons,
             currentPersonId: persons[0]?.id,
@@ -111,9 +124,6 @@ export const useStore = create(
 
       apiKey: "",
       setApiKey: (apiKey) => set({ apiKey }),
-
-      screen: "home",
-      setScreen: (screen) => set({ screen }),
 
       messages: [],
       addMessage: (message) => {

@@ -1,16 +1,14 @@
 import { useState } from "react";
-import { IoIosSettings } from "react-icons/io";
 import { useFocus } from "../hooks/useFocus";
 import { useGPT } from "../hooks/useGPT";
 import { MessageType, useStore } from "../hooks/useStore";
 import { Markdown } from "../components/Markdown";
 import { VscDebugRestart } from "react-icons/vsc";
-import { open } from "@tauri-apps/api/shell";
-import { PersonalitySelect } from "../components/PersonalitySelect";
+import { defaultPrompt } from "../config";
 
 const Message = ({ content, role }: MessageType) => {
   return (
-    <div className={` p-2 rounded-lg my-1 ${role === "user" ? "text-right bg-primary text-primary-content" : "text-left bg-base-300"}`}>
+    <div className={`p-2 rounded-lg my-1 ${role === "user" ? "text-right bg-primary text-primary-content" : "text-left bg-base-300"}`}>
       {content ? <Markdown>{content}</Markdown> : <div>...</div>}
     </div>
   );
@@ -19,12 +17,12 @@ const Message = ({ content, role }: MessageType) => {
 export const Home = () => {
   const [input, setInput] = useState("");
   const messages = useStore((s) => s.messages);
-  const setScreen = useStore((s) => s.setScreen);
   const clearChat = useStore((s) => s.clearMessages);
   const apiKey = useStore((s) => s.apiKey);
   const call = useGPT();
   const inputRef = useFocus();
-
+  const person = useStore((s) => s.persons.find((p) => p.id === s.currentPersonId));
+  const prompt = person?.prompt || defaultPrompt(person?.name);
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setInput("");
@@ -32,17 +30,21 @@ export const Home = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col justify-between w-screen">
-      <div className="flex justify-between  p-2 items-center border-b border-base-content">
-        <PersonalitySelect />
-        <IoIosSettings className="text-xl cursor-pointer" onClick={() => setScreen("settings")} />
-      </div>
-      <div className="h-full overflow-auto flex flex-col-reverse px-2">
-        {[...messages].reverse().map((m) => (
-          <Message key={m.id} {...m} />
-        ))}
-      </div>
-      <form onSubmit={submit} className="w-full p-2 flex space-x-2 items-center">
+    <div className="h-full flex flex-col justify-between">
+      {!!messages.length && (
+        <div className="h-full overflow-auto flex flex-col-reverse px-2">
+          {[...messages].reverse().map((m) => (
+            <Message key={m.id} {...m} />
+          ))}
+        </div>
+      )}
+      {!messages.length && (
+        <div className=" h-full flex items-center justify-center">
+          <textarea value={prompt} className="textarea mx-[10%] h-[50%] resize-none" readOnly />
+        </div>
+      )}
+
+      <form onSubmit={submit} className=" shrink-0 w-full p-2 flex space-x-2 items-center">
         <button onClick={clearChat} type="button">
           <VscDebugRestart className="aspect-square h-full shrink-0 w-[20px] text-error" />
         </button>

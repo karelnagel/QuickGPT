@@ -1,5 +1,5 @@
 import { Position } from "tauri-plugin-positioner-api";
-import { EditPerson } from "../components/EditPerson";
+import { SettingsWrapper } from "../components/SettingsWrapper";
 import { isValidKey, StringIsNumber } from "../helpers";
 import { TextSize, useStore } from "../hooks/useStore";
 
@@ -8,17 +8,16 @@ export const Settings = () => {
   const shortcut = useStore((s) => s.shortcut);
   const setShortcut = useStore((s) => s.setShortcut);
   const setApiKey = useStore((s) => s.setApiKey);
-  const setScreen = useStore((s) => s.setScreen);
   const postion = useStore((s) => s.position);
   const setPosition = useStore((s) => s.setPosition);
   const textSize = useStore((s) => s.textSize);
   const setTextSize = useStore((s) => s.setTextSize);
 
   return (
-    <div className="flex flex-col items-center space-y-2 w-full max-w-xs m-auto px-2 overflow-auto h-full rounded-lg">
+    <SettingsWrapper title="Settings">
       <div className="form-control w-full">
         <label className="label">
-          <span className="label-text">OpenAI API key</span>
+          <span className="label-text">OpenAI API key, if you want to use your own</span>
         </label>
         <input type="text" value={apiKey} onChange={(e) => setApiKey(e.target.value)} className="input" placeholder="sk-..." />
         {apiKey && !isValidKey(apiKey) && (
@@ -29,13 +28,13 @@ export const Settings = () => {
       </div>
       <div className="form-control w-full">
         <label className="label">
-          <span className="label-text">Shortcut</span>
+          <span className="label-text">Shortcut to open</span>
         </label>
         <input type="text" value={shortcut} onChange={(e) => setShortcut(e.target.value)} className="input" placeholder="CmdOrControl+Shift+G" />
       </div>
       <div className="form-control w-full">
         <label className="label">
-          <span className="label-text">Text Size</span>
+          <span className="label-text">Message text size</span>
         </label>
         <select value={textSize} onChange={(e) => setTextSize(e.target.value as TextSize)} className="select">
           {Object.entries(TextSize).map(([key, value]) => (
@@ -47,7 +46,7 @@ export const Settings = () => {
       </div>
       <div className="form-control w-full">
         <label className="label">
-          <span className="label-text">Postition</span>
+          <span className="label-text">Window position</span>
         </label>
         <select value={postion} onChange={(e) => setPosition(Number(e.target.value))} className="select">
           {Object.entries(Position)
@@ -59,10 +58,6 @@ export const Settings = () => {
             ))}
         </select>
       </div>
-      <EditPerson />
-      <button onClick={() => setScreen("home")} className="btn btn-primary btn-sm">
-        Save
-      </button>
-    </div>
+    </SettingsWrapper>
   );
 };

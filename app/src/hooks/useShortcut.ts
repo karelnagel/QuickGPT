@@ -7,11 +7,15 @@ export const useShortcut = () => {
   const clearChat = useStore((s) => s.clearMessages);
   const nextPerson = useStore((s) => s.nextPerson);
   const prevPerson = useStore((s) => s.prevPerson);
+  const nextTab = useStore((s) => s.nextTab);
+  const prevTab = useStore((s) => s.prevTab);
   const handleKeyDown = (e: KeyboardEvent) => {
     const ctrl = e.metaKey || e.ctrlKey;
     if (ctrl && (e.key === "Backspace" || e.key === "Delete")) clearChat();
-    if (ctrl && (e.key === "ArrowRight" || e.key === "ArrowDown")) nextPerson();
-    if (ctrl && (e.key === "ArrowLeft" || e.key === "ArrowUp")) prevPerson();
+    if (ctrl && e.key === "ArrowDown") nextPerson();
+    if (ctrl && e.key === "ArrowUp") prevPerson();
+    if (ctrl && e.key === "ArrowRight") nextTab();
+    if (ctrl && e.key === "ArrowLeft") prevTab();
   };
   const shortcut = useStore((s) => s.shortcut);
   const set = async () => {

@@ -1,11 +1,12 @@
 import { useEffect, useRef } from "react";
+import { useStore } from "./useStore";
 
 export const useFocus = () => {
   const ref = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    window.addEventListener("focus", () => {
-      ref.current?.focus();
-    });
-  }, []);
+  const personId = useStore((s) => s.currentPersonId);
+  const tab = useStore((s) => s.tab);
+  const focus = () => ref.current?.focus();
+  useEffect(() => window.addEventListener("focus", focus), []);
+  useEffect(focus, [personId, tab]);
   return ref;
 };

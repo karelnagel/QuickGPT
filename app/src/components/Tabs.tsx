@@ -9,10 +9,10 @@ export const Tabs = () => {
   const setPersonality = useStore((s) => s.setCurrentPersonId);
   const tab = useStore((s) => s.tab);
   const setTab = useStore((s) => s.setTab);
-
+  const activeTab = "bg-gradient-to-r from-primary to-secondary text-white";
   return (
     <div className="tabs tabs-boxed w-full grid grid-cols-3 shrink-0">
-      <div className={`tab p-0 w-full cursor-pointer ${tab === "chat" ? "tab-active" : "hover:bg-base-100"}`}>
+      <div className={`tab p-0 w-full cursor-pointer ${tab === "chat" ? activeTab : "hover:bg-base-100"}`}>
         <div className="dropdown dropdown-hover w-full ">
           <label tabIndex={0} onClick={() => setTab("chat")} className="flex items-center space-x-2 cursor-pointer w-full px-2">
             {person && <img src={person.image || defaultPersonImage} className="h-6 aspect-square object-cover rounded-full shrink-0" />}
@@ -34,10 +34,10 @@ export const Tabs = () => {
           </ul>
         </div>
       </div>
-      <div onClick={() => setTab("persons")} className={`tab w-full cursor-pointer ${tab === "persons" ? "tab-active" : "hover:bg-base-100"}`}>
+      <div onClick={() => setTab("persons")} className={`tab w-full cursor-pointer ${tab === "persons" ? activeTab: "hover:bg-base-100"}`}>
         Edit
       </div>
-      <div onClick={() => setTab("settings")} className={`tab w-full cursor-pointer ${tab === "settings" ? "tab-active" : "hover:bg-base-100"}`}>
+      <div onClick={() => setTab("settings")} className={`tab w-full cursor-pointer ${tab === "settings" ? activeTab : "hover:bg-base-100"}`}>
         Settings
       </div>
     </div>

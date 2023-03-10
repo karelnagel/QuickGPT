@@ -1,7 +1,7 @@
 {
-  "name": "deskgpt-app",
+  "name": "quickgpt-app",
   "private": true,
-  "version": "0.0.13",
+  "version": "0.0.14",
   "type": "module",
   "main": "./src/App.tsx",
   "scripts": {

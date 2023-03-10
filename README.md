@@ -1,5 +1,5 @@
-# [Experience the Power of ChatGPT on Your Desktop - DeskGPT](https://deskgpt.vercel.app/)
- ## The Fastest, Most User-Friendly ChatGPT Application - And It's Open Source! DeskGPT provides hassle-free access to ChatGPT on your desktop, designed for Mac, Windows, Linux and also Web.
+# [Experience the Power of ChatGPT on Your Desktop - QuickGPT](https://quickgpt.xzy/)
+ ## The Fastest, Most User-Friendly ChatGPT Application - And It's Open Source! QuickGPT provides hassle-free access to ChatGPT on your desktop, designed for Mac, Windows, Linux and also Web.
 
  The app lives in your menu bar and allows you to quickly access chatGPT from anywhere on your computer, 
  just by pressing `ctrl/cmd + shift + G`, or by clicking on the icon in your menu bar. It automatically focuses on the input field, so you can start typing right away, and sends with pressing enter, not like some other alternatives.
@@ -8,19 +8,13 @@
 
  It also has a prompt field so you can make it act a certain way.
 
- ![screenshot](https://raw.githubusercontent.com/karelnagel/deskgpt/main/app/public/screenshot.png)
+ ![screenshot](https://raw.githubusercontent.com/karelnagel/quickgpt/main/app/public/screenshot.png)
 
 
 
 ## Installation
 
-[Mac](https://github.com/karelnagel/deskgpt/releases/latest/download/Mac.GPT_0.0.0_x64.dmg)
-
-[Windows](https://github.com/karelnagel/deskgpt/releases/latest/download/Mac.GPT_0.0.0_x64_en-US.msi)
-
-[Linux](https://github.com/karelnagel/deskgpt/releases/latest)
-
-[All latest release files](https://github.com/karelnagel/deskgpt/releases/latest)
+[Download](https://github.com/karelnagel/quickgpt/releases/latest)
 
  
 ## Why

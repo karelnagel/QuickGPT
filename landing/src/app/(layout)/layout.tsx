@@ -1,15 +1,11 @@
-import { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { Footer } from "~/components/Footer";
 import { Header } from "~/components/Header";
 
-const inter = Inter({ subsets: ["latin"] });
-export const metadata: Metadata = {
-  title: "DeskGPT - ChatGPT in your PC",
-  description:
-    " ChatGPT client for Mac, Windows and Linux, for super easy and fast access.",
-  icons: [{ url: "/favicon.png" }],
-};
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 export default function RootLayout({
   children,
@@ -17,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col" style={inter.style}>
+    <div className="flex min-h-screen flex-col" style={poppins.style}>
       <Header />
       <main className="mx-auto mb-auto flex w-full max-w-screen-lg">
         {children}

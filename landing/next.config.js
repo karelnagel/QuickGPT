@@ -12,7 +12,7 @@ const config = {
   experimental: {
     appDir: true
   },
-  transpilePackages: ["deskgpt-app"],
+  transpilePackages: ["quickgpt-app"],
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   async headers() {
     return [

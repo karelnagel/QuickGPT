@@ -7,7 +7,7 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "DeskGPT",
+    "productName": "QuickGPT",
     "version": "../package.json"
   },
   "tauri": {
@@ -34,7 +34,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "app.deskgpt",
+      "identifier": "app.quickgpt",
       "targets": "all"
     },
     "security": {

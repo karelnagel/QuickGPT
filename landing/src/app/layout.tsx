@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "DeskGPT - ChatGPT in your PC",
+  title: "QuickGPT - ChatGPT in your PC",
   description:
     " ChatGPT client for Mac, Windows and Linux, for super easy and fast access.",
   icons: [{ url: "/favicon.png" }],

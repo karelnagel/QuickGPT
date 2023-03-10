@@ -20,7 +20,7 @@
     "@trpc/react-query": "^10.9.0",
     "@trpc/server": "^10.9.0",
     "daisyui": "^2.51.3",
-    "deskgpt-app": "*",
+    "quickgpt-app": "*",
     "next": "^13.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",

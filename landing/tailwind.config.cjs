@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx}",
-    path.join(path.dirname(require.resolve('deskgpt-app')), '**/*.{js,ts,jsx,tsx,html}'),
+    path.join(path.dirname(require.resolve('quickgpt-app')), '**/*.{js,ts,jsx,tsx,html}'),
   ],
   theme: {
     extend: {},

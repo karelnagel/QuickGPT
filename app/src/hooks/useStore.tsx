@@ -144,7 +144,7 @@ export const useStore = create(
       },
     }),
     {
-      name: "deskgpt",
+      name: "quickgpt",
     }
   )
 );

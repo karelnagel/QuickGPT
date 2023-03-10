@@ -25,14 +25,14 @@ export const defaultPersonalities: Personality[] = [
     image: "/persons/barack.jpg",
   },
   {
-    id: "davinci",
-    name: "Leonardo Da Vinci",
-    image: "/persons/leonardo.jpeg",
-  },
-  {
-    id: "jesus",
-    name: "Jesus Christ",
-    image: "/persons/jesus.jpeg",
+    id: "gifs",
+    name: "GIFs",
+    image: "http://scythe-spot-carpenter.glitch.me/search?search_term=happy+tuesday.gif",
+    prompt: `hey ChatGPT. hope you're having a great day. From now on you will respond to anything I say with the perfect gif response. 
+    Once you know what gif you want to use, compile the most accurate and perfect search phrase that will result in the specific gif you want to send.
+    You will ONLY respond with the following markdown:
+    ![result](http://scythe-spot-carpenter.glitch.me/search?search_term=<SEARCH+PHRASE>.gif)
+     `,
   },
   {
     id: "chatgpt",

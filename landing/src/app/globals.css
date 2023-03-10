@@ -11,3 +11,15 @@ code {
 .select {
   @apply w-full rounded-xl bg-base-200 focus:outline-none;
 }
+
+.text-title {
+  @apply bg-gradient-to-tr from-primary to-secondary bg-clip-text text-transparent;
+}
+
+.btn {
+  @apply rounded-full text-[22px] normal-case  hover:scale-105 duration-150;;
+}
+
+.btn-gradient {
+  @apply bg-gradient-to-r from-primary to-secondary text-white
+}

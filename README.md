@@ -1,7 +1,6 @@
-# [DeskGPT](https://deskgpt.vercel.app/)
- 
- This is a native app for Mac, Windows and Linux that allows you to access ChatGPT fast and easily.
- 
+# [Experience the Power of ChatGPT on Your Desktop - DeskGPT](https://deskgpt.vercel.app/)
+ ## The Fastest, Most User-Friendly ChatGPT Application - And It's Open Source! DeskGPT provides hassle-free access to ChatGPT on your desktop, designed for Mac, Windows, Linux and also Web.
+
  The app lives in your menu bar and allows you to quickly access chatGPT from anywhere on your computer, 
  just by pressing `ctrl/cmd + shift + G`, or by clicking on the icon in your menu bar. It automatically focuses on the input field, so you can start typing right away, and sends with pressing enter, not like some other alternatives.
 

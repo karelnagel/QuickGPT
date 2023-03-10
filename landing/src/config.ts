@@ -35,7 +35,8 @@ export const footer = [
     title: "About",
     links: [
       { title: "How to install", url: "/how-to-install" },
-      { title: "Personalities", url: "/personalities" },
+      { title: "Best Prompts", url: "/best-prompts" },
+      { title: "Persons", url: "/persons" },
       { title: "Contributing", url: "/contributing" },
     ],
   },

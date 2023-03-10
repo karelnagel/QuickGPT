@@ -75,10 +75,28 @@ jobs:
           APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
           CI: true
         with:
           args: ${{ matrix.platform == 'macos-latest' && '--target universal-apple-darwin' || '' }}
           releaseId: ${{ needs.create-release.outputs.release_id }}
+      - uses: actions/upload-artifact@v2
+        if: matrix.platform == 'ubuntu-latest'
+        with:
+          name: linux-updater-artifacts
+          path: ./target/release/bundle/appimage/*.AppImage.*
+
+      - uses: actions/upload-artifact@v2
+        if: matrix.platform == 'windows-latest'
+        with:
+          name: windows-updater-artifacts
+          path: ./target/release/bundle/msi/*
+
+      - uses: actions/upload-artifact@v2
+        if: matrix.platform == 'macos-latest'
+        with:
+          name: macos-updater-artifacts
+          path: ./target/release/bundle/macos/*.app.tar.*
 
   publish-release:
     permissions:

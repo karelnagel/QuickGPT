@@ -32,7 +32,7 @@ export const Home = () => {
   return (
     <div className="h-full flex flex-col justify-between">
       {!!messages.length && (
-        <div className="h-full overflow-auto flex flex-col-reverse px-2">
+        <div className="h-full overflow-auto flex flex-col-reverse scroll no-scrollbar">
           {[...messages].reverse().map((m) => (
             <Message key={m.id} {...m} />
           ))}
@@ -44,7 +44,7 @@ export const Home = () => {
         </div>
       )}
 
-      <form onSubmit={submit} className=" shrink-0 w-full p-2 flex space-x-2 items-center">
+      <form onSubmit={submit} className=" shrink-0 w-full pt-2 flex space-x-2 items-center">
         <button onClick={clearChat} type="button">
           <VscDebugRestart className="aspect-square h-full shrink-0 w-[20px] text-error" />
         </button>

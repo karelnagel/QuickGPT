@@ -13,13 +13,23 @@ code {
 }
 
 .text-title {
-  @apply bg-gradient-to-tr from-primary to-secondary bg-clip-text text-transparent;
+  @apply text-primary;
 }
 
 .btn {
-  @apply rounded-full text-[22px] normal-case  hover:scale-105 duration-150;;
+  @apply rounded-full text-[18px] normal-case duration-150  hover:scale-105 md:text-[20px];
 }
 
 .btn-gradient {
-  @apply bg-gradient-to-r from-primary to-secondary text-white border-none;
+  @apply border-none bg-gradient-to-r from-primary to-secondary text-white;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

@@ -16,7 +16,7 @@ export default function App() {
   const isCLient = useIsClient();
   if (!isCLient) return <div>Loading...</div>;
   return (
-    <div className="rounded-xl overflow-hidden bg-base-100 h-screen w-screen flex flex-col">
+    <div className="rounded-xl overflow-hidden bg-base-100 h-screen w-screen flex flex-col p-2 ">
       <Tabs />
       <div className=" h-full w-full overflow-hidden">
         {tab === "chat" && <Home />}

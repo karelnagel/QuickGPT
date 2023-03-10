@@ -5,7 +5,7 @@ import { Logo } from "./Logo";
 
 export const Footer = () => {
   return (
-    <div className="bg-base-300 p-4 mt-6">
+    <div className="relative  bg-base-300 p-6">
       <div className="m-auto grid max-w-screen-lg grid-cols-4 gap-2">
         <div className="flex items-center">
           <Logo />

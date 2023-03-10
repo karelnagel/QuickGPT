@@ -3,7 +3,7 @@ import { Logo } from "./Logo";
 
 export const Header = () => {
   return (
-    <div className="mx-auto flex w-full max-w-screen-lg items-center justify-between py-3">
+    <div className="mx-auto flex w-full max-w-screen-lg items-center justify-between py-3 relative">
       <Logo />
       <Download />
     </div>

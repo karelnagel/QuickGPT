@@ -34,7 +34,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "app.quickgpt",
+      "identifier": "xyz.quickgpt.app",
       "targets": "all"
     },
     "security": {
@@ -53,7 +53,7 @@
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "menubar",
+        "title": "QuickGPT",
         "width": 400,
         "visible": true,
         "hiddenTitle": true,

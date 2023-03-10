@@ -34,7 +34,7 @@ export const Tabs = () => {
           </ul>
         </div>
       </div>
-      <div onClick={() => setTab("persons")} className={`tab w-full cursor-pointer ${tab === "persons" ? activeTab: "hover:bg-base-100"}`}>
+      <div onClick={() => setTab("persons")} className={`tab w-full cursor-pointer ${tab === "persons" ? activeTab : "hover:bg-base-100"}`}>
         Edit
       </div>
       <div onClick={() => setTab("settings")} className={`tab w-full cursor-pointer ${tab === "settings" ? activeTab : "hover:bg-base-100"}`}>

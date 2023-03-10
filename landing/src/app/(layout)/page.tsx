@@ -26,7 +26,7 @@ export default function Page() {
             </a>
           </div>
         </div>
-        <div className="my-16 h-[550px] w-[350px] shrink-0">
+        <div className="my-16 flex h-[550px] w-[350px] shrink-0 flex-col items-end">
           <iframe
             src="/app"
             className=" h-full w-full rounded-xl border border-primary"

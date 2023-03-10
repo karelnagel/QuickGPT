@@ -9,7 +9,11 @@ export const github = "https://github.com/karelnagel/quickgpt";
 export const Device = z.enum(["mac", "windows", "linux", "other"]);
 export type Device = z.infer<typeof Device>;
 export const devices: {
-  [key in Device]: { file?: (v: string) => string; title: string };
+  [key in Device]: {
+    file?: (v: string) => string;
+    title: string;
+    url?: string;
+  };
 } = {
   mac: {
     file: (v) => `QuickGPT_${v}_universal.dmg`,
@@ -23,7 +27,7 @@ export const devices: {
     file: (v) => `quick-gpt_${v}_amd64.deb`,
     title: "Download for Linux",
   },
-  other: { title: "Get Started" },
+  other: { title: "Go To App", url: "/app" },
 };
 export const footer = [
   {

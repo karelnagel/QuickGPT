@@ -15,7 +15,10 @@ export const Download = ({ className }: { className?: string }) => {
 
   return (
     <div className={`dropdown-hover dropdown ${className}`}>
-      <a target="_blank" href={`/api/download?device=${device}`}>
+      <a
+        target="_blank"
+        href={devices[device].url || `/api/download?device=${device}`}
+      >
         <label
           tabIndex={0}
           className="btn-gradient btn flex w-full flex-nowrap space-x-2 normal-case"
@@ -32,7 +35,12 @@ export const Download = ({ className }: { className?: string }) => {
           .filter(([key]) => key !== device)
           .map(([key, { title }]) => (
             <li key={key}>
-              <a target="_blank" download href={`/api/download?device=${key}`}>
+              <a
+                target="_blank"
+                href={
+                  devices[key as Device].url || `/api/download?device=${key}`
+                }
+              >
                 {title}
               </a>
             </li>

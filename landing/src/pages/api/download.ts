@@ -19,6 +19,7 @@ export default async function Download(req: NextRequest) {
     status: result.status,
     headers: {
       ...result.headers,
+      "Cache-Control": "s-maxage=3600, public",
       "content-disposition": `attachment; filename=QuickGPT.${file
         ?.split(".")
         .pop()}`,

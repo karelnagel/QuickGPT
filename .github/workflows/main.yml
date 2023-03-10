@@ -84,7 +84,7 @@ jobs:
         if: matrix.platform == 'ubuntu-latest'
         with:
           name: linux-updater-artifacts
-          path: ./target/release/bundle/appimage/*.AppImage.*
+          path: ./target/release/bundle/appimage/*
 
       - uses: actions/upload-artifact@v2
         if: matrix.platform == 'windows-latest'
@@ -96,7 +96,7 @@ jobs:
         if: matrix.platform == 'macos-latest'
         with:
           name: macos-updater-artifacts
-          path: ./target/release/bundle/macos/*.app.tar.*
+          path: ./target/release/bundle/macos/*
 
   publish-release:
     permissions:

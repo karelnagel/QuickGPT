@@ -23,27 +23,9 @@ export default async function GPT(req: NextRequest) {
       }),
     });
 
-    try {
-      const reader = res.body?.getReader();
-      if (!reader) return new Response("Error", { status: 500 });
-      const stream = new ReadableStream({
-        start(controller) {
-          const pump = async () => {
-            const { done, value } = await reader?.read();
-            if (done) return controller.close();
-            controller.enqueue(value);
-            pump();
-          };
-          return pump();
-        },
-      });
-
-      return new Response(stream, {
-        status: res.status,
-        headers: res.headers,
-      });
-    } catch (e) {
-      return new Response("Error", { status: 500 });
-    }
+    return new Response(res.body, {
+      status: res.status,
+      headers: res.headers,
+    });
   }
 }

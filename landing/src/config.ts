@@ -1,25 +1,23 @@
-export type Device = "mac" | "windows" | "linux" | "other";
+import { z } from "zod";
 
 export const release = "https://github.com/karelnagel/deskgpt/releases/latest";
 export const github = "https://github.com/karelnagel/deskgpt";
 
-export const links: { [key in Device]: { url: string; title: string } } = {
-  mac: {
-    url: "https://github.com/karelnagel/deskgpt/releases/latest/download/DeskGPT.dmg",
-    title: "Download For Mac",
-  },
+export const Device = z.enum(["mac", "windows", "linux", "other"]);
+export type Device = z.infer<typeof Device>;
+export const devices: {
+  [key in Device]: { file?: (v: string) => string; title: string };
+} = {
+  mac: { file: (v) => `DeskGPT_${v}_universal.dmg`, title: "Download for Mac" },
   windows: {
-    url: "https://github.com/karelnagel/deskgpt/releases/latest/download/DeskGPT.msi",
-    title: "Download For Windows",
+    file: (v) => `DeskGPT_${v}_x64_en-US.msi`,
+    title: "Download for Windows",
   },
   linux: {
-    url: "https://github.com/karelnagel/deskgpt/releases/latest/download/DeskGPT.deb",
-    title: "Download For Linux",
+    file: (v) => `desk-gpt_${v}_amd64.deb`,
+    title: "Download for Linux",
   },
-  other: {
-    url: release,
-    title: "View Releases",
-  },
+  other: { title: "Get S" },
 };
 export const footer = [
   {

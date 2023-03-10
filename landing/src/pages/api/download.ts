@@ -17,6 +17,11 @@ export default async function Download(req: NextRequest) {
   const result = await fetch(url);
   return new Response(result.body, {
     status: result.status,
-    headers: result.headers,
+    headers: {
+      ...result.headers,
+      "content-disposition": `attachment; filename=QuickGPT.${file
+        ?.split(".")
+        .pop()}`,
+    },
   });
 }

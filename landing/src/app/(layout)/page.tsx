@@ -13,8 +13,7 @@ export default function Page() {
           </h1>
           <h2 className="text-xl leading-[1.4]">
             The Fastest, Most User-Friendly ChatGPT Application - And It's Open
-            Source! QuickGPT provides hassle-free access to ChatGPT on your
-            desktop, designed for Mac, Windows, Linux and also Web.
+            Source! Designed for Mac, Windows and Linux.
           </h2>
           <div className="flex space-x-2">
             <Download />

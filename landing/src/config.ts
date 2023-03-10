@@ -96,6 +96,11 @@ export const faq = [
       "To install QuickGPT, simply visit our website at https://quickgpt.xyz and download the appropriate version for your operating system. Once downloaded, simply run the installer and follow the on-screen instructions to set up the application.",
   },
   {
+    question: "How much does it cost?",
+    answer:
+      "For now it is free, but as the project grows, we may need to charge a small fee to cover the costs of using OpenAI's API. But you can always get a free API key from OpenAI, use the app with that key and pay OpenAI for your usage.",
+  },
+  {
     question: "Can I use my own OpenAI API key with QuickGPT?",
     answer:
       "Yes, you can use your own OpenAI apiKey with QuickGPT to keep your text generation private and secure. Simply enter your apiKey in the settings panel in QuickGPT.",

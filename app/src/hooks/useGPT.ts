@@ -14,6 +14,7 @@ export const useGPT = () => {
   const person = useStore((s) => s.persons.find((p) => p.id === s.currentPersonId));
   const addMessage = useStore((s) => s.addMessage);
   const editMessage = useStore((s) => s.editMessage);
+  const messagesToSend = useStore((s) => s.messagesToSend);
 
   const call = async (message: string) => {
     const id = getRandomId();
@@ -22,7 +23,7 @@ export const useGPT = () => {
     addMessage({ id, role: "assistant", content: "" });
     const messages = [
       { role: "user", content: person?.prompt || defaultPrompt(person?.name) },
-      ...Message.array().parse(chat),
+      ...Message.array().parse(chat.splice(-(messagesToSend || 0))),
       { role: "user", content: message },
     ];
 

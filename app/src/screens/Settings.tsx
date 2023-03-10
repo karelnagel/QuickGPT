@@ -12,6 +12,8 @@ export const Settings = () => {
   const setPosition = useStore((s) => s.setPosition);
   const textSize = useStore((s) => s.textSize);
   const setTextSize = useStore((s) => s.setTextSize);
+  const messagesToSend = useStore((s) => s.messagesToSend);
+  const setMessagesToSend = useStore((s) => s.setMessagesToSend);
 
   return (
     <SettingsWrapper title="Settings">
@@ -31,6 +33,18 @@ export const Settings = () => {
           <span className="label-text">Shortcut to open</span>
         </label>
         <input type="text" value={shortcut} onChange={(e) => setShortcut(e.target.value)} className="input" placeholder="CmdOrControl+Shift+G" />
+      </div>
+      <div className="form-control w-full">
+        <label className="label">
+          <span className="label-text">How many messages should be sent to ChatGPT (less = cheaper costs, empty will send all)</span>
+        </label>
+        <input
+          type="number"
+          value={messagesToSend === undefined ? "" : messagesToSend}
+          onChange={(e) => setMessagesToSend(e.target.value === "" ? undefined : Number(e.target.value))}
+          className="input"
+          placeholder="Will send all messages"
+        />
       </div>
       <div className="form-control w-full">
         <label className="label">

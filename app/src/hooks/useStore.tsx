@@ -60,6 +60,9 @@ export type StoreType = {
   addMessage: (message: MessageType) => void;
   editMessage: (message: MessageType) => void;
   clearMessages: () => void;
+
+  messagesToSend?: number;
+  setMessagesToSend: (num?: number) => void;
 };
 const tabs: Tab[] = ["chat", "persons", "settings"];
 export const useStore = create(
@@ -142,6 +145,7 @@ export const useStore = create(
           messages: [],
         }));
       },
+      setMessagesToSend: (num) => set({ messagesToSend: num }),
     }),
     {
       name: "quickgpt",

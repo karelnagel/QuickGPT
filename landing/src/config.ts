@@ -11,7 +11,10 @@ export type Device = z.infer<typeof Device>;
 export const devices: {
   [key in Device]: { file?: (v: string) => string; title: string };
 } = {
-  mac: { file: (v) => `QuickGPT_${v}_universal.dmg`, title: "Download for Mac" },
+  mac: {
+    file: (v) => `QuickGPT_${v}_universal.dmg`,
+    title: "Download for Mac",
+  },
   windows: {
     file: (v) => `QuickGPT_${v}_x64_en-US.msi`,
     title: "Download for Windows",
@@ -20,7 +23,7 @@ export const devices: {
     file: (v) => `quick-gpt_${v}_amd64.deb`,
     title: "Download for Linux",
   },
-  other: { title: "Get S" },
+  other: { title: "Get Started" },
 };
 export const footer = [
   {

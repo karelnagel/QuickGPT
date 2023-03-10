@@ -44,7 +44,7 @@ export default function Page() {
         </p>
         <div className="mx-auto grid max-w-screen-md grid-cols-2 gap-10">
           {features.map((feature) => (
-            <div key={feature.title} className="flex flex-col  space-y-4">
+            <div key={feature.title} className="flex flex-col space-y-4">
               <feature.image className="gradient h-14 w-14 rounded-lg bg-gradient-to-tr from-primary to-secondary p-2 text-white" />
               <h3 className="text-xl font-bold">{feature.title}</h3>
 

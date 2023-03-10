@@ -1,4 +1,4 @@
-# [Experience the Power of ChatGPT on Your Desktop - QuickGPT](https://quickgpt.xzy/)
+# [Experience the Power of ChatGPT on Your Desktop - QuickGPT](https://quickgpt.xyz/)
  ## The Fastest, Most User-Friendly ChatGPT Application - And It's Open Source! QuickGPT provides hassle-free access to ChatGPT on your desktop, designed for Mac, Windows, Linux and also Web.
 
  The app lives in your menu bar and allows you to quickly access chatGPT from anywhere on your computer, 

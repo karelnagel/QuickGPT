@@ -93,7 +93,7 @@ export const faq = [
   {
     question: "How can I install QuickGPT?",
     answer:
-      "To install QuickGPT, simply visit our website at https://quickgpt.xzy and download the appropriate version for your operating system. Once downloaded, simply run the installer and follow the on-screen instructions to set up the application.",
+      "To install QuickGPT, simply visit our website at https://quickgpt.xyz and download the appropriate version for your operating system. Once downloaded, simply run the installer and follow the on-screen instructions to set up the application.",
   },
   {
     question: "Can I use my own OpenAI API key with QuickGPT?",
@@ -122,6 +122,6 @@ export const faq = [
   {
     question: "How do I add my own custom prompt to QuickGPT?",
     answer:
-      "To add your own custom prompt to QuickGPT, simply type your prompt into the Prompt field. Read this blog post about how to write the best prompts for ChatGPT: https://quickgpt.xzy/best-prompts",
+      "To add your own custom prompt to QuickGPT, simply type your prompt into the Prompt field. Read this blog post about how to write the best prompts for ChatGPT: https://quickgpt.xyz/best-prompts",
   },
 ];

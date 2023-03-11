@@ -37,13 +37,14 @@ export const Tabs = () => {
 const OnePerson = ({ id }: { id: string }) => {
   const person = usePerson(id);
   const setPersonId = useStore((s) => s.setPersonId);
+  const personId = useStore((s) => s.personId);
   if (!person) return null;
   return (
     <li
       key={person.id}
       onClick={() => setPersonId(person.id)}
       className={`cursor-pointer flex items-center space-x-1 px-1 py-1 ${
-        person.id === person?.id ? "bg-primary" : "hover:bg-primary hover:bg-opacity-40"
+        person.id === personId ? "bg-primary" : "hover:bg-primary hover:bg-opacity-40"
       }`}
     >
       <img src={person.image || defaultPersonImage} alt={person.name} className="h-6 w-6 object-cover rounded-full" />

@@ -1,15 +1,10 @@
-import { Position } from "tauri-plugin-positioner-api";
 import { SettingsWrapper } from "../components/SettingsWrapper";
-import { isValidKey, StringIsNumber } from "../helpers";
+import { isValidKey } from "../helpers";
 import { TextSize, useStore } from "../hooks/useStore";
 
 export const Settings = () => {
   const apiKey = useStore((s) => s.apiKey);
-  const shortcut = useStore((s) => s.shortcut);
-  const setShortcut = useStore((s) => s.setShortcut);
   const setApiKey = useStore((s) => s.setApiKey);
-  const postion = useStore((s) => s.position);
-  const setPosition = useStore((s) => s.setPosition);
   const textSize = useStore((s) => s.textSize);
   const setTextSize = useStore((s) => s.setTextSize);
   const messagesToSend = useStore((s) => s.messagesToSend);
@@ -27,12 +22,6 @@ export const Settings = () => {
             <span className="label-text-alt text-error">Invalid key, should start with 'sk-' and be more than 30 chars long</span>
           </label>
         )}
-      </div>
-      <div className="form-control w-full">
-        <label className="label">
-          <span className="label-text">Shortcut to open</span>
-        </label>
-        <input type="text" value={shortcut} onChange={(e) => setShortcut(e.target.value)} className="input" placeholder="CmdOrControl+Shift+G" />
       </div>
       <div className="form-control w-full">
         <label className="label">
@@ -56,20 +45,6 @@ export const Settings = () => {
               {value}
             </option>
           ))}
-        </select>
-      </div>
-      <div className="form-control w-full">
-        <label className="label">
-          <span className="label-text">Window position</span>
-        </label>
-        <select value={postion} onChange={(e) => setPosition(Number(e.target.value))} className="select">
-          {Object.entries(Position)
-            .filter(([key]) => StringIsNumber(key))
-            .map(([key, value]) => (
-              <option key={key} value={key}>
-                {value}
-              </option>
-            ))}
         </select>
       </div>
     </SettingsWrapper>

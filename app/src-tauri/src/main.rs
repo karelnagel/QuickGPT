@@ -2,21 +2,12 @@
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
+mod spotlight;
 
 use tauri::{
     api::shell::open, CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu,
 };
-use tauri_plugin_positioner::{Position, WindowExt};
 
-#[tauri::command]
-fn toggle_window(window: tauri::Window) {
-    if window.is_visible().unwrap() {
-        window.hide().unwrap();
-    } else {
-        window.show().unwrap();
-        window.set_focus().unwrap();
-    }
-}
 fn main() {
     let quit = CustomMenuItem::new("quit".to_string(), "Quit").accelerator("Cmd+Q");
     let website =
@@ -28,55 +19,53 @@ fn main() {
             app.set_activation_policy(tauri::ActivationPolicy::Accessory);
             Ok(())
         })
-        .plugin(tauri_plugin_positioner::init())
         .system_tray(SystemTray::new().with_menu(system_tray_menu))
-        .on_system_tray_event(|app, event| {
-            tauri_plugin_positioner::on_tray_event(app, &event);
-            match event {
-                SystemTrayEvent::LeftClick {
-                    position: _,
-                    size: _,
-                    ..
-                } => {
-                    let window = app.get_window("main").unwrap();
-                    #[cfg(target_os = "macos")]
-                    window.move_window(Position::TrayCenter).unwrap();
-                    toggle_window(window);
+        .on_system_tray_event(|app, event| match event {
+            SystemTrayEvent::LeftClick {
+                position: _,
+                size: _,
+                ..
+            } => {
+                let window = app.get_window("main").unwrap();
+                if window.is_visible().unwrap() {
+                    spotlight::show_spotlight(window);
+                } else {
+                    spotlight::hide_spotlight(window);
                 }
-                SystemTrayEvent::RightClick {
-                    position: _,
-                    size: _,
-                    ..
-                } => {
-                    println!("system tray received a right click");
-                }
-                SystemTrayEvent::DoubleClick {
-                    position: _,
-                    size: _,
-                    ..
-                } => {
-                    println!("system tray received a double click");
-                }
-                SystemTrayEvent::MenuItemClick { id, .. } => match id.as_str() {
-                    "quit" => {
-                        std::process::exit(0);
-                    }
-                    "website" => {
-                        open(
-                            &app.shell_scope(),
-                            "https://github.com/karelnagel/quickgpt",
-                            None,
-                        )
-                        .unwrap();
-                    }
-                    "hide" => {
-                        let window = app.get_window("main").unwrap();
-                        window.hide().unwrap();
-                    }
-                    _ => {}
-                },
-                _ => {}
             }
+            SystemTrayEvent::RightClick {
+                position: _,
+                size: _,
+                ..
+            } => {
+                println!("system tray received a right click");
+            }
+            SystemTrayEvent::DoubleClick {
+                position: _,
+                size: _,
+                ..
+            } => {
+                println!("system tray received a double click");
+            }
+            SystemTrayEvent::MenuItemClick { id, .. } => match id.as_str() {
+                "quit" => {
+                    std::process::exit(0);
+                }
+                "website" => {
+                    open(
+                        &app.shell_scope(),
+                        "https://github.com/karelnagel/quickgpt",
+                        None,
+                    )
+                    .unwrap();
+                }
+                "hide" => {
+                    let window = app.get_window("main").unwrap();
+                    window.hide().unwrap();
+                }
+                _ => {}
+            },
+            _ => {}
         })
         .on_window_event(|event| match event.event() {
             tauri::WindowEvent::Focused(is_focused) => {
@@ -87,7 +76,11 @@ fn main() {
             }
             _ => {}
         })
-        .invoke_handler(tauri::generate_handler![toggle_window])
+        .invoke_handler(tauri::generate_handler![
+            spotlight::init_spotlight_window,
+            spotlight::hide_spotlight
+        ])
+        .manage(spotlight::State::default())
         .build(tauri::generate_context!())
         .expect("error while running tauri application")
         .run(|_app_handle, event| match event {

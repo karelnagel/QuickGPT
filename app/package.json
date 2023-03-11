@@ -1,7 +1,7 @@
 {
   "name": "quickgpt-app",
   "private": true,
-  "version": "0.0.20",
+  "version": "0.0.21",
   "type": "module",
   "main": "./src/App.tsx",
   "scripts": {
@@ -17,7 +17,6 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-markdown": "^8.0.5",
-    "tauri-plugin-positioner-api": "github:tauri-apps/tauri-plugin-positioner",
     "zod": "^3.21.4",
     "zustand": "^4.3.6"
   },

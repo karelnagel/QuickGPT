@@ -1,4 +1,3 @@
-import { Position } from "tauri-plugin-positioner-api";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
@@ -44,12 +43,6 @@ export type StoreType = {
   apiKey: string;
   setApiKey: (apiKey: string) => void;
 
-  position: Position;
-  setPosition: (position: Position) => void;
-
-  shortcut: string;
-  setShortcut: (k: string) => void;
-
   personId: string;
   setPersonId: (id: string) => void;
   persons: Persons;
@@ -79,9 +72,6 @@ export const useStore = create(
 
       textSize: "text-base",
       setTextSize: (size) => set({ textSize: size }),
-
-      position: Position.TrayCenter,
-      setPosition: (position) => set({ position }),
 
       persons: defaultPersons,
       allPersons: defAllPersons,
@@ -122,9 +112,6 @@ export const useStore = create(
           s.allPersons = defAllPersons;
           s.personId = defaultPerson;
         }),
-
-      shortcut: "CmdOrControl+Shift+G",
-      setShortcut: (key) => set({ shortcut: key }),
 
       apiKey: "",
       setApiKey: (apiKey) => set({ apiKey }),

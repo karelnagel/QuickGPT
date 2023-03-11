@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useStore } from "./useStore";
 
 export const useFocus = () => {
-  const ref = useRef<HTMLInputElement>(null);
+  const ref = useRef<HTMLTextAreaElement>(null);
   const personId = useStore((s) => s.personId);
   const tab = useStore((s) => s.tab);
   const focus = () => ref.current?.focus();

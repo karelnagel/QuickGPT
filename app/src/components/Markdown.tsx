@@ -10,7 +10,7 @@ export const Markdown = ({ children }: { children: string }) => {
       components={{
         a: ({ href, children, className, style }) => {
           return (
-            <button onClick={() => (href ? open(href) : undefined)} className={`text-primary ${className}`} style={style}>
+            <button onClick={() => (href ? open(href) : undefined)} className={`underline ${className}`} style={style}>
               {children}
             </button>
           );

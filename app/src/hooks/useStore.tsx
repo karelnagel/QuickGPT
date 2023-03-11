@@ -3,7 +3,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { Tab } from "../components/Tabs";
-import { defaultPersons } from "../config";
+import { defaultPersons, defaultPrompt } from "../config";
 
 const defAllPersons = Object.keys(defaultPersons);
 const defaultPerson = defAllPersons[0] || "";
@@ -153,3 +153,7 @@ export const useStore = create(
 );
 export const usePerson = (id?: string) => useStore((s) => s.persons[id || s.personId]);
 export const useMessages = (id?: string) => usePerson(id)?.messages || [];
+export const usePrompt = (id?: string) => {
+  const person = usePerson(id);
+  return person?.prompt || defaultPrompt(person?.name);
+};

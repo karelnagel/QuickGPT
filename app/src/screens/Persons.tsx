@@ -1,10 +1,10 @@
 import { SettingsWrapper } from "../components/SettingsWrapper";
-import { defaultPrompt } from "../config";
 import { getRandomId } from "../helpers";
-import { usePerson, useStore } from "../hooks/useStore";
+import { usePerson, usePrompt, useStore } from "../hooks/useStore";
 
 export const Persons = () => {
   const person = usePerson();
+  const prompt = usePrompt();
   const setPerson = useStore((s) => s.editPerson);
   const newPerson = useStore((s) => s.addPerson);
   const resetPersons = useStore((s) => s.resetPersons);
@@ -38,7 +38,7 @@ export const Persons = () => {
               value={person.prompt || ""}
               onChange={(e) => setPerson({ ...person, prompt: e.target.value })}
               className="textarea min-h-[200px]"
-              placeholder={defaultPrompt(person.name)}
+              placeholder={prompt}
             />
           </div>
           <button className="btn btn-sm btn-error" onClick={() => removePerson(person?.id)}>

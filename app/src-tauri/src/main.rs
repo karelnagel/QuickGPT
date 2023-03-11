@@ -3,7 +3,9 @@
     windows_subsystem = "windows"
 )]
 
+#[cfg(target_os = "macos")]
 mod macspot;
+
 mod spotlight;
 
 use tauri::{

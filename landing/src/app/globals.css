@@ -17,7 +17,7 @@ code {
 }
 
 .btn {
-  @apply rounded-full text-[18px] normal-case duration-150  hover:scale-105 md:text-[20px];
+  @apply rounded-full text-[18px] normal-case duration-150 hover:scale-105 md:text-[20px];
 }
 
 .btn-gradient {
@@ -32,4 +32,7 @@ code {
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+.prose pre code{
+  @apply block text-left w-full;
 }

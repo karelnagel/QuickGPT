@@ -21,3 +21,7 @@ body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.prose pre code{
+  @apply block text-left w-full;
+}

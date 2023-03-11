@@ -1,4 +1,4 @@
-import { useStore } from "./useStore";
+import { useMessages, usePerson, useStore } from "./useStore";
 import z from "zod";
 import { getRandomId, isTauri } from "../helpers";
 import { defaultPrompt } from "../config";
@@ -10,8 +10,8 @@ const Message = z.object({
 
 export const useGPT = () => {
   const apiKey = useStore((s) => s.apiKey);
-  const chat = useStore((s) => s.messages);
-  const person = useStore((s) => s.persons.find((p) => p.id === s.currentPersonId));
+  const chat = useMessages();
+  const person = usePerson();
   const addMessage = useStore((s) => s.addMessage);
   const editMessage = useStore((s) => s.editMessage);
   const messagesToSend = useStore((s) => s.messagesToSend);
@@ -21,9 +21,10 @@ export const useGPT = () => {
     let result = "";
     addMessage({ content: message, role: "user", id: getRandomId() });
     addMessage({ id, role: "assistant", content: "" });
+    console.log(chat);
     const messages = [
       { role: "user", content: person?.prompt || defaultPrompt(person?.name) },
-      ...Message.array().parse(chat.splice(-(messagesToSend || 0))),
+      ...Message.array().parse([...chat].splice(-(messagesToSend || 0))),
       { role: "user", content: message },
     ];
 

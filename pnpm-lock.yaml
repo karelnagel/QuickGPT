@@ -19,6 +19,7 @@ importers:
       '@vitejs/plugin-react': ^3.0.0
       autoprefixer: ^10.4.13
       daisyui: ^2.51.3
+      immer: ^9.0.19
       postcss: ^8.4.21
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -33,13 +34,14 @@ importers:
     dependencies:
       '@tauri-apps/api': 1.2.0
       daisyui: 2.51.3_gbtt6ss3tbiz4yjtvdr6fbrj44
+      immer: 9.0.19
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-icons: 4.8.0_react@18.2.0
       react-markdown: 8.0.5_pmekkgnqduwlme35zpnqhenc34
       tauri-plugin-positioner-api: github.com/tauri-apps/tauri-plugin-positioner/50bf4f00ded1f2e121dbbe22d135b5bf92699fbb
       zod: 3.21.4
-      zustand: 4.3.6_react@18.2.0
+      zustand: 4.3.6_immer@9.0.19+react@18.2.0
     devDependencies:
       '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.7
       '@tauri-apps/cli': 1.2.3
@@ -76,6 +78,7 @@ importers:
       daisyui: ^2.51.3
       eslint: ^8.34.0
       eslint-config-next: ^13.2.1
+      immer: ^9.0.19
       next: ^13.2.1
       postcss: ^8.4.14
       prettier: ^2.8.1
@@ -102,6 +105,7 @@ importers:
       '@trpc/server': 10.14.1
       '@vercel/edge-config': 0.1.1
       daisyui: 2.51.3_gbtt6ss3tbiz4yjtvdr6fbrj44
+      immer: 9.0.19
       next: 13.2.3_biqbaboplfbrettd7655fr4n2y
       quickgpt-app: link:../app
       react: 18.2.0
@@ -2725,6 +2729,10 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  /immer/9.0.19:
+    resolution: {integrity: sha512-eY+Y0qcsB4TZKwgQzLaE/lqYMlKhv5J9dyd2RhhtGhNo2njPXDqU9XPfcNfa3MIDsdtZt5KlkIsirlo4dHsWdQ==}
+    dev: false
+
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -4889,7 +4897,7 @@ packages:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
     dev: false
 
-  /zustand/4.3.6_react@18.2.0:
+  /zustand/4.3.6_immer@9.0.19+react@18.2.0:
     resolution: {integrity: sha512-6J5zDxjxLE+yukC2XZWf/IyWVKnXT9b9HUv09VJ/bwGCpKNcaTqp7Ws28Xr8jnbvnZcdRaidztAPsXFBIqufiw==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -4901,6 +4909,7 @@ packages:
       react:
         optional: true
     dependencies:
+      immer: 9.0.19
       react: 18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false

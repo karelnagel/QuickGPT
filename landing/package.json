@@ -21,6 +21,7 @@
     "@trpc/server": "^10.9.0",
     "@vercel/edge-config": "^0.1.1",
     "daisyui": "^2.51.3",
+    "immer": "^9.0.19",
     "next": "^13.2.1",
     "quickgpt-app": "*",
     "react": "18.2.0",

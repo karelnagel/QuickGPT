@@ -1,22 +1,26 @@
 import { Position } from "tauri-plugin-positioner-api";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { immer } from "zustand/middleware/immer";
 import { Tab } from "../components/Tabs";
-import { defaultPersonalities, startMessages } from "../config";
+import { defaultPersons } from "../config";
 
-const defaultPerson = (defaultPersonalities as any)[0].id;
+const defAllPersons = Object.keys(defaultPersons);
+const defaultPerson = defAllPersons[0] || "";
 export type MessageType = {
   id: string;
   role: "user" | "assistant" | "system";
   content: string;
 };
 export type Screen = "home" | "settings";
-export type Personality = {
+export type Person = {
   id: string;
   name: string;
   image?: string;
   prompt?: string;
+  messages: MessageType[];
 };
+export type Persons = { [id: string]: Person };
 export const TextSize = {
   "text-xs": "XS",
   "text-sm": "S",
@@ -46,17 +50,17 @@ export type StoreType = {
   shortcut: string;
   setShortcut: (k: string) => void;
 
-  currentPersonId: string;
-  setCurrentPersonId: (id: string) => void;
-  persons: Personality[];
+  personId: string;
+  setPersonId: (id: string) => void;
+  persons: Persons;
+  allPersons: string[];
   nextPerson: () => void;
   prevPerson: () => void;
-  addPerson: (personality: Personality) => void;
+  addPerson: (person: Person) => void;
   removePerson: (id: string) => void;
-  editPerson: (personality: Personality) => void;
+  editPerson: (person: Person) => void;
   resetPersons: () => void;
 
-  messages: MessageType[];
   addMessage: (message: MessageType) => void;
   editMessage: (message: MessageType) => void;
   clearMessages: () => void;
@@ -66,16 +70,12 @@ export type StoreType = {
 };
 const tabs: Tab[] = ["chat", "persons", "settings"];
 export const useStore = create(
-  persist<StoreType>(
-    (set, get) => ({
+  persist(
+    immer<StoreType>((set, get) => ({
       tab: "chat",
       setTab: (tab) => set({ tab }),
-      nextTab: () => {
-        set((s) => ({ tab: tabs[(tabs.indexOf(s.tab) + 1) % tabs.length] }));
-      },
-      prevTab: () => {
-        set((s) => ({ tab: tabs[(tabs.indexOf(s.tab) - 1 + tabs.length) % tabs.length] }));
-      },
+      nextTab: () => set((s) => ({ tab: tabs[(tabs.indexOf(s.tab) + 1) % tabs.length] })),
+      prevTab: () => set((s) => ({ tab: tabs[(tabs.indexOf(s.tab) - 1 + tabs.length) % tabs.length] })),
 
       textSize: "text-base",
       setTextSize: (size) => set({ textSize: size }),
@@ -83,45 +83,45 @@ export const useStore = create(
       position: Position.TrayCenter,
       setPosition: (position) => set({ position }),
 
-      persons: defaultPersonalities,
-      currentPersonId: defaultPerson,
-      setCurrentPersonId: (id) => set({ currentPersonId: id }),
-      addPerson: (personality) => {
-        set((state) => ({
-          persons: [...state.persons, personality],
-          currentPersonId: personality.id,
-        }));
-      },
-      removePerson: (id) => {
-        set((state) => {
-          let persons = state.persons.filter((p) => p.id !== id);
-          if (persons.length === 0) persons = defaultPersonalities;
-          return {
-            persons: persons,
-            currentPersonId: persons[0]?.id,
-          };
-        });
-      },
-      editPerson: (personality) => {
-        set((state) => ({
-          persons: state.persons.map((p) => (p.id === personality.id ? personality : p)),
-        }));
-      },
-      nextPerson: () => {
-        const { persons: personalities, currentPersonId: currentPersonality } = get();
-        const currentIndex = personalities.findIndex((p) => p.id === currentPersonality);
-        const nextIndex = (currentIndex + 1) % personalities.length;
-        set({ currentPersonId: (personalities as any)[nextIndex].id });
-      },
-      prevPerson: () => {
-        const { persons: personalities, currentPersonId: currentPersonality } = get();
-        const currentIndex = personalities.findIndex((p) => p.id === currentPersonality);
-        const nextIndex = (currentIndex - 1 + personalities.length) % personalities.length;
-        set({ currentPersonId: (personalities as any)[nextIndex].id });
-      },
-      resetPersons: () => {
-        set({ persons: defaultPersonalities, currentPersonId: defaultPerson });
-      },
+      persons: defaultPersons,
+      allPersons: defAllPersons,
+      personId: defaultPerson,
+
+      setPersonId: (personId) => set({ personId }),
+      addPerson: (person) =>
+        set((s) => {
+          s.persons[person.id] = person;
+          s.allPersons.push(person.id);
+          s.personId = person.id;
+        }),
+      removePerson: (id) =>
+        set((s) => {
+          delete s.persons[id];
+          s.allPersons = s.allPersons.filter((p) => p !== id);
+          s.personId = s.allPersons[0] || "";
+          if (!s.allPersons.length) s.resetPersons();
+        }),
+      editPerson: (person) =>
+        set((s) => {
+          s.persons[person.id] = person;
+        }),
+
+      nextPerson: () =>
+        set((s) => {
+          const index = s.allPersons.indexOf(s.personId);
+          s.personId = s.allPersons[(index + 1) % s.allPersons.length] || "";
+        }),
+      prevPerson: () =>
+        set((s) => {
+          const index = s.allPersons.indexOf(s.personId);
+          s.personId = s.allPersons[(index - 1 + s.allPersons.length) % s.allPersons.length] || "";
+        }),
+      resetPersons: () =>
+        set((s) => {
+          s.persons = defaultPersons;
+          s.allPersons = defAllPersons;
+          s.personId = defaultPerson;
+        }),
 
       shortcut: "CmdOrControl+Shift+G",
       setShortcut: (key) => set({ shortcut: key }),
@@ -129,26 +129,27 @@ export const useStore = create(
       apiKey: "",
       setApiKey: (apiKey) => set({ apiKey }),
 
-      messages: startMessages,
-      addMessage: (message) => {
-        set((state) => ({
-          messages: [...state.messages, message],
-        }));
-      },
-      editMessage: (message) => {
-        set((state) => ({
-          messages: state.messages.map((m) => (m.id === message.id ? message : m)),
-        }));
-      },
-      clearMessages: () => {
-        set((state) => ({
-          messages: [],
-        }));
-      },
+      addMessage: (message) =>
+        set((state) => {
+          const person = state.persons[state.personId];
+          if (person) person.messages = [...person.messages, message];
+        }),
+      editMessage: (message) =>
+        set((s) => {
+          const person = s.persons[s.personId];
+          if (person) person.messages = person.messages.map((m) => (m.id === message.id ? message : m));
+        }),
+      clearMessages: () =>
+        set((s) => {
+          const person = s.persons[s.personId];
+          if (person) person.messages = [];
+        }),
       setMessagesToSend: (num) => set({ messagesToSend: num }),
-    }),
+    })),
     {
       name: "quickgpt",
     }
   )
 );
+export const usePerson = (id?: string) => useStore((s) => s.persons[id || s.personId]);
+export const useMessages = (id?: string) => usePerson(id)?.messages || [];

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useFocus } from "../hooks/useFocus";
 import { useGPT } from "../hooks/useGPT";
-import { MessageType, useStore } from "../hooks/useStore";
+import { MessageType, useMessages, usePerson, useStore } from "../hooks/useStore";
 import { Markdown } from "../components/Markdown";
 import { VscDebugRestart } from "react-icons/vsc";
 import { defaultPrompt } from "../config";
@@ -16,12 +16,11 @@ const Message = ({ content, role }: MessageType) => {
 
 export const Home = () => {
   const [input, setInput] = useState("");
-  const messages = useStore((s) => s.messages);
+  const messages = useMessages();
   const clearChat = useStore((s) => s.clearMessages);
-  const apiKey = useStore((s) => s.apiKey);
   const call = useGPT();
   const inputRef = useFocus();
-  const person = useStore((s) => s.persons.find((p) => p.id === s.currentPersonId));
+  const person = usePerson();
   const prompt = person?.prompt || defaultPrompt(person?.name);
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

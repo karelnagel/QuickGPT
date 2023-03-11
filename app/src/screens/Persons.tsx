@@ -1,10 +1,10 @@
 import { SettingsWrapper } from "../components/SettingsWrapper";
 import { defaultPrompt } from "../config";
 import { getRandomId } from "../helpers";
-import { useStore } from "../hooks/useStore";
+import { usePerson, useStore } from "../hooks/useStore";
 
 export const Persons = () => {
-  const person = useStore((s) => s.persons.find((p) => p.id === s.currentPersonId));
+  const person = usePerson();
   const setPerson = useStore((s) => s.editPerson);
   const newPerson = useStore((s) => s.addPerson);
   const resetPersons = useStore((s) => s.resetPersons);
@@ -47,7 +47,7 @@ export const Persons = () => {
         </>
       )}
 
-      <button className="btn btn-sm btn-primary" onClick={() => newPerson({ id: getRandomId(), name: "New Person", prompt: "" })}>
+      <button className="btn btn-sm btn-primary" onClick={() => newPerson({ id: getRandomId(), name: "New Person", prompt: "", messages: [] })}>
         Add Person
       </button>
 

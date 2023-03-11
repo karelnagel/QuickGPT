@@ -2,6 +2,8 @@
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
+
+mod macspot;
 mod spotlight;
 
 use tauri::{
@@ -80,7 +82,7 @@ fn main() {
             spotlight::init_spotlight_window,
             spotlight::hide_spotlight
         ])
-        .manage(spotlight::State::default())
+        .manage(macspot::State::default())
         .build(tauri::generate_context!())
         .expect("error while running tauri application")
         .run(|_app_handle, event| match event {

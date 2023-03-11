@@ -26,7 +26,10 @@ export default function Page() {
             </a>
           </div>
         </div>
-        <div className="group  hidden h-[550px] w-[350px] shrink-0 flex-col items-end md:flex">
+        <div className="group relative hidden h-[550px] w-[350px] shrink-0 flex-col items-end md:flex">
+          <p className="absolute top-0 -left-60 rotate-12 text-4xl italic">
+            {"Try It Here ->"}
+          </p>
           <iframe
             src="/app"
             className=" h-full w-full rounded-xl"

@@ -84,7 +84,10 @@ fn main() {
             spotlight::init_spotlight_window,
             spotlight::hide_spotlight
         ])
-        .manage(macspot::State::default())
+        .manage({
+            #[cfg(target_os = "macos")]
+            macspot::State::default()
+        })
         .build(tauri::generate_context!())
         .expect("error while running tauri application")
         .run(|_app_handle, event| match event {

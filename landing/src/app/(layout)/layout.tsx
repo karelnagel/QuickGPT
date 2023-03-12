@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <div className="relative flex min-h-screen flex-col" style={poppins.style}>
       <div className="fixed h-screen w-screen">
-        <Image src="/bg18.jpg" fill={true} alt="" className="fixed" priority />
+        <Image src="/bg16.jpg" fill={true} alt="" className="fixed" priority />
       </div>
       <Header />
       <main className="relative mb-auto flex w-full ">{children}</main>

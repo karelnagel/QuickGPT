@@ -16,7 +16,7 @@ export const Footer = () => {
             className="flex flex-col items-center space-y-4 md:items-start"
           >
             <h3 className="text-lg font-bold uppercase">{item.title}</h3>
-            <div className="flex h-full flex-col space-y-1">
+            <div className="flex h-full flex-col items-center space-y-1 md:items-start">
               {item.links.map((link) => (
                 <Link href={link.url} key={link.title}>
                   {link.title}

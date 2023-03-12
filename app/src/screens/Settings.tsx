@@ -8,41 +8,42 @@ export const Settings = () => {
   const setTextSize = useStore((s) => s.setTextSize);
   const messagesToSend = useStore((s) => s.messagesToSend);
   const setMessagesToSend = useStore((s) => s.setMessagesToSend);
-  const sizes = Object.entries(TextSize);
+  const stream = useStore((s) => s.stream);
+  const setStream = useStore((s) => s.setStream);
+
   return (
     <div className=" p-3 items-center flex flex-col space-y-3 text-center text-sm border-t">
-      <div className="w-full space-y-2">
-        <p>History to send</p>
-        <div className="grid grid-cols-5 w-full space-x-3">
+      <div className="grid grid-cols-3 gap-2">
+        <div className="flex flex-col items-center justify-between space-y-1">
+          <label className="label-text">History</label>
           <input
-            type="range"
-            min={0}
-            step={1}
-            max={100}
-            value={messagesToSend === undefined ? 100 : messagesToSend}
-            onChange={(e) => setMessagesToSend(e.target.value === "100" ? undefined : Number(e.target.value))}
-            className="range range-sm range-primary col-span-4"
+            type="number"
+            value={messagesToSend === undefined ? "" : messagesToSend}
+            onChange={(e) => setMessagesToSend(e.target.value === "" ? undefined : Number(e.target.value))}
+            className="input input-sm"
+            placeholder="All"
           />
-          <p>{messagesToSend === undefined ? "All" : messagesToSend === 0 ? "None" : messagesToSend}</p>
+        </div>
+
+        <div className="flex flex-col items-center justify-between space-y-1">
+          <label className="label-text">Text</label>
+          <select value={textSize} onChange={(e) => setTextSize(e.target.value as TextSize)} className="select select-sm">
+            {Object.entries(TextSize).map(([key, value]) => (
+              <option key={key} value={key}>
+                {value}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex flex-col items-center justify-between space-y-1">
+          <label className="label-text">Stream</label>
+          <input type="checkbox" checked={stream} onChange={(e) => setStream(!stream)} className="toggle" />
         </div>
       </div>
-      <div className="w-full space-y-2">
-        <p>Text Size</p>
-        <div className="grid grid-cols-5 w-full space-x-3">
-          <input
-            type="range"
-            min={0}
-            step={1}
-            max={sizes.length - 1}
-            className="range range-sm range-primary col-span-4"
-            value={sizes.findIndex((s) => s[0] === textSize)}
-            onChange={(e) => setTextSize(sizes[Number(e.target.value) || 0]?.[0] as TextSize)}
-          />
-          <p>{TextSize[textSize]}</p>
-        </div>
-      </div>
+
       <div className=" w-full space-y-2">
-        <p>OpenAI API key</p>
+        <label className="label-text">OpenAI API key</label>
         <input type="text" value={apiKey} onChange={(e) => setApiKey(e.target.value)} className="input input-sm input-primary" placeholder="sk-..." />
         {apiKey && !isValidKey(apiKey) && <span className="label-text-alt text-error">Invalid key</span>}
       </div>

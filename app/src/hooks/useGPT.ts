@@ -14,6 +14,7 @@ export const useGPT = () => {
   const editMessage = useStore((s) => s.editMessage);
   const messagesToSend = useStore((s) => s.messagesToSend);
   const prompt = usePrompt();
+  const stream = useStore((s) => s.stream);
 
   const call = async (message: string) => {
     const id = getRandomId();
@@ -36,31 +37,39 @@ export const useGPT = () => {
       body: JSON.stringify({
         model: "gpt-3.5-turbo",
         messages,
-        stream: true,
+        stream,
       }),
     });
-    const reader = res.body?.getReader();
-    if (!reader) return;
+    try {
+      if (!stream) {
+        const result = await res.json();
+        const content = result.choices[0].message.content;
+        editMessage({ id, role: "assistant", content });
+      } else {
+        const reader = res.body?.getReader();
+        if (!reader) return;
 
-    const decoder = new TextDecoder();
+        const decoder = new TextDecoder();
 
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
 
-      const chunkValue = decoder.decode(value);
-      const chunks = chunkValue.replaceAll("data:", "").split("\n");
-      for (const chunk of chunks) {
-        try {
-          const json = JSON.parse(chunk);
-          const res = json.choices[0].delta?.content || "";
-          result += res;
-          console.log(result);
-          editMessage({ id, role: "assistant", content: result });
-        } catch (e) {
-          //   console.log(chunk, "error");
+          const chunkValue = decoder.decode(value);
+          const chunks = chunkValue.replaceAll("data:", "").split("\n");
+          for (const chunk of chunks) {
+            try {
+              const json = JSON.parse(chunk);
+              const res = json.choices[0].delta?.content || "";
+              result += res;
+              editMessage({ id, role: "assistant", content: result });
+            } catch (e) {}
+          }
         }
       }
+    } catch (e) {
+      alert("Error with generating text");
+      console.log(e);
     }
   };
   return call;

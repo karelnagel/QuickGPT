@@ -1,7 +1,7 @@
 {
   "name": "quickgpt-app",
   "private": true,
-  "version": "0.0.25",
+  "version": "0.0.26",
   "type": "module",
   "main": "./src/App.tsx",
   "scripts": {

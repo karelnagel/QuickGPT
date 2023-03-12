@@ -54,7 +54,7 @@
         "height": 600,
         "resizable": true,
         "title": "QuickGPT",
-        "width": 400,
+        "width": 800,
         "visible": true,
         "hiddenTitle": true,
         "decorations": false,

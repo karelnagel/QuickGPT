@@ -34,6 +34,9 @@ export type StoreType = {
   textSize: TextSize;
   setTextSize: (size: TextSize) => void;
 
+  showEditPerson: boolean;
+  setShowEditPerson: () => void;
+
   stream: boolean;
   setStream: (s: boolean) => void;
   showSidePanel: boolean;
@@ -64,8 +67,12 @@ export type StoreType = {
 export const useStore = create(
   persist(
     immer<StoreType>((set, get) => ({
-      stream:true,
-      setStream:(s)=>set({stream:s}),
+      showEditPerson: false,
+      setShowEditPerson: () => set((s) => ({ showEditPerson: !s.showEditPerson })),
+
+      stream: true,
+      setStream: (s) => set({ stream: s }),
+      
       showSidePanel: true,
       setShowSidePanel: () => set((s) => ({ showSidePanel: !s.showSidePanel })),
 

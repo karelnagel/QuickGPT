@@ -17,7 +17,7 @@ code {
 }
 
 .btn {
-  @apply rounded-full text-[18px] normal-case duration-150 hover:scale-105 md:text-[20px];
+  @apply rounded-full text-[18px] normal-case md:text-[20px];
 }
 
 .btn-gradient {

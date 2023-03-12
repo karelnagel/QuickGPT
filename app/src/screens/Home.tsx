@@ -5,15 +5,18 @@ import { IoIosMenu } from "react-icons/io";
 import { VscDebugRestart } from "react-icons/vsc";
 import { defaultPersonImage } from "../config";
 import { Settings } from "./Settings";
+import { EditPerson } from "./EditPerson";
 
 export const Home = () => {
   const personId = useStore((s) => s.personId);
+  const edit = useStore((s) => s.showEditPerson);
+
   return (
     <div className="h-screen w-screen flex bg-base-100 ">
       <SidePanel />
       <div className="flex flex-col w-full h-full">
         <TopBar />
-        {personId === "new" ? <New /> : <Messages />}
+        {personId === "new" ? <New /> : edit ? <EditPerson /> : <Messages />}
       </div>
     </div>
   );
@@ -53,10 +56,13 @@ const TopBar = () => {
   const clearChat = useStore((s) => s.clearMessages);
   const setPerson = useStore((s) => s.setPersonId);
   const personId = useStore((s) => s.personId);
+  const setShowEditPerson = useStore((s) => s.setShowEditPerson);
   return (
-    <div className=" bg-base-300 flex justify-between items-center px-3 h-12">
+    <div className=" bg-base-300 flex justify-between items-center px-3 h-12 shrink-0">
       <IoIosMenu className="h-[24px] w-[24px] md:invisible cursor-pointer" onClick={() => setPerson()} />
-      <p className="text-xl">{personId !== "new" ? person?.name : "Add New Chat"}</p>
+      <p onClick={setShowEditPerson} className="text-xl cursor-pointer">
+        {personId !== "new" ? person?.name : "Add New Chat"}
+      </p>
       <VscDebugRestart onClick={clearChat} className={`h-[24px] w-[24px] cursor-pointer ${personId === "new" ? "invisible" : ""}`} />
     </div>
   );

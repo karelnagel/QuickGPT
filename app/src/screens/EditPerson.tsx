@@ -9,7 +9,7 @@ export const EditPerson = () => {
   const setPersonId = useStore((s) => s.setPersonId);
   if (!person) return null;
   return (
-    <div className="flex flex-col space-y-2">
+    <div className="flex flex-col space-y-2 p-2">
       <div className="form-control w-full">
         <label className="label">
           <span className="label-text">Name</span>

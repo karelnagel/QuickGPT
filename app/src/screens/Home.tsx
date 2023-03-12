@@ -6,6 +6,7 @@ import { VscDebugRestart } from "react-icons/vsc";
 import { defaultPersonImage } from "../config";
 import { Settings } from "./Settings";
 import { EditPerson } from "./EditPerson";
+import { AddPerson } from "./AddPerson";
 
 export const Home = () => {
   const personId = useStore((s) => s.personId);
@@ -16,7 +17,7 @@ export const Home = () => {
       <SidePanel />
       <div className="flex flex-col w-full h-full">
         <TopBar />
-        {personId === "new" ? <New /> : edit ? <EditPerson /> : <Messages />}
+        {personId === "new" ? <AddPerson /> : edit ? <EditPerson /> : <Messages />}
       </div>
     </div>
   );
@@ -36,7 +37,7 @@ const SidePanel = () => {
         <div className="h-12 w-full p-2">
           <button
             onClick={() => setPersonId("new")}
-            className="shadow-sm bg-base-100 rounded-lg text-center hover:scale-105 duration-150 h-full w-full"
+            className="shadow-sm bg-base-100 rounded-lg hover:bg-primary duration-200 text-center h-full w-full"
           >
             Add New Chat
           </button>
@@ -87,13 +88,7 @@ const OnePerson = ({ id }: { id: string }) => {
     </li>
   );
 };
-const New = () => {
-  return (
-    <div className="h-full flex flex-col justify-center">
-      <h1 className="text-2xl text-center">Add New Chat</h1>
-    </div>
-  );
-};
+
 const Messages = () => {
   const messages = useMessages();
   const prompt = usePrompt();

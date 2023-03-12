@@ -36,7 +36,7 @@ export const Settings = () => {
             max={sizes.length - 1}
             className="range range-sm range-primary col-span-4"
             value={sizes.findIndex((s) => s[0] === textSize)}
-            onChange={(e) => setTextSize(sizes[Number(e.target.value) || 0][0] as TextSize)}
+            onChange={(e) => setTextSize(sizes[Number(e.target.value) || 0]?.[0] as TextSize)}
           />
           <p>{TextSize[textSize]}</p>
         </div>

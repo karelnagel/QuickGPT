@@ -6,16 +6,12 @@ export const Shortcuts = () => {
   const clearChat = useStore((s) => s.clearMessages);
   const nextPerson = useStore((s) => s.nextPerson);
   const prevPerson = useStore((s) => s.prevPerson);
-  const nextTab = useStore((s) => s.nextTab);
-  const prevTab = useStore((s) => s.prevTab);
 
   const handleKeyDown = async (e: KeyboardEvent) => {
     const ctrl = e.metaKey || e.ctrlKey;
     if (ctrl && (e.key === "Backspace" || e.key === "Delete")) clearChat();
     else if (ctrl && e.key === "ArrowDown") nextPerson();
     else if (ctrl && e.key === "ArrowUp") prevPerson();
-    else if (ctrl && e.key === "ArrowRight") nextTab();
-    else if (ctrl && e.key === "ArrowLeft") prevTab();
     else if (e.key === "Escape" && isTauri()) {
       const { invoke } = await import("@tauri-apps/api/tauri");
       invoke("hide_spotlight");

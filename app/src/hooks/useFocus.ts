@@ -4,9 +4,8 @@ import { useStore } from "./useStore";
 export const useFocus = () => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const personId = useStore((s) => s.personId);
-  const tab = useStore((s) => s.tab);
   const focus = () => ref.current?.focus();
   useEffect(() => window.addEventListener("focus", focus), []);
-  useEffect(focus, [personId, tab]);
+  useEffect(focus, [personId]);
   return ref;
 };

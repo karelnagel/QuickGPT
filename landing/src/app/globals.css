@@ -33,6 +33,9 @@ code {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
-.prose pre code{
-  @apply block text-left w-full;
+.prose pre code {
+  @apply block w-full text-left;
+}
+.blog * {
+  color: white !important;
 }

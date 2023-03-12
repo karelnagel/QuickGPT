@@ -5,8 +5,8 @@ import { Question } from "~/components/Question";
 
 export default function Page() {
   return (
-    <div className="w-full text-center text-white md:text-left">
-      <div className="mx-auto my-16 flex w-full max-w-screen-lg flex-col items-center justify-between md:flex-row">
+    <div className="w-full text-center  md:text-left">
+      <div className="mx-auto my-16 flex w-full max-w-screen-lg flex-col items-center justify-between md:flex-row text-white">
         <div className="max-w-xl space-y-6">
           <h1 className="text-title text-[40px] font-bold leading-[1.1]  md:text-[60px]">
             Experience the Power of ChatGPT on Your Desktop

@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { Tab } from "../components/Tabs";
 import { defaultPersons, defaultPrompt } from "../config";
 
 const defAllPersons = Object.keys(defaultPersons);
@@ -32,19 +31,17 @@ export const TextSize = {
 export type TextSize = keyof typeof TextSize;
 
 export type StoreType = {
-  tab: Tab;
-  setTab: (tab: Tab) => void;
-  nextTab: () => void;
-  prevTab: () => void;
-
   textSize: TextSize;
   setTextSize: (size: TextSize) => void;
+
+  showSidePanel: boolean;
+  setShowSidePanel: () => void;
 
   apiKey: string;
   setApiKey: (apiKey: string) => void;
 
-  personId: string;
-  setPersonId: (id: string) => void;
+  personId?: string;
+  setPersonId: (id?: string) => void;
   persons: Persons;
   allPersons: string[];
   nextPerson: () => void;
@@ -61,14 +58,11 @@ export type StoreType = {
   messagesToSend?: number;
   setMessagesToSend: (num?: number) => void;
 };
-const tabs: Tab[] = ["chat", "persons", "settings"];
 export const useStore = create(
   persist(
     immer<StoreType>((set, get) => ({
-      tab: "chat",
-      setTab: (tab) => set({ tab }),
-      nextTab: () => set((s) => ({ tab: tabs[(tabs.indexOf(s.tab) + 1) % tabs.length] })),
-      prevTab: () => set((s) => ({ tab: tabs[(tabs.indexOf(s.tab) - 1 + tabs.length) % tabs.length] })),
+      showSidePanel: true,
+      setShowSidePanel: () => set((s) => ({ showSidePanel: !s.showSidePanel })),
 
       textSize: "text-base",
       setTextSize: (size) => set({ textSize: size }),
@@ -98,12 +92,12 @@ export const useStore = create(
 
       nextPerson: () =>
         set((s) => {
-          const index = s.allPersons.indexOf(s.personId);
+          const index = s.personId ? s.allPersons.indexOf(s.personId) : 0;
           s.personId = s.allPersons[(index + 1) % s.allPersons.length] || "";
         }),
       prevPerson: () =>
         set((s) => {
-          const index = s.allPersons.indexOf(s.personId);
+          const index = s.personId ? s.allPersons.indexOf(s.personId) : 0;
           s.personId = s.allPersons[(index - 1 + s.allPersons.length) % s.allPersons.length] || "";
         }),
       resetPersons: () =>
@@ -118,17 +112,17 @@ export const useStore = create(
 
       addMessage: (message) =>
         set((state) => {
-          const person = state.persons[state.personId];
+          const person = state.persons[state.personId || ""];
           if (person) person.messages = [...person.messages, message];
         }),
       editMessage: (message) =>
         set((s) => {
-          const person = s.persons[s.personId];
+          const person = s.persons[s.personId || ""];
           if (person) person.messages = person.messages.map((m) => (m.id === message.id ? message : m));
         }),
       clearMessages: () =>
         set((s) => {
-          const person = s.persons[s.personId];
+          const person = s.persons[s.personId || ""];
           if (person) person.messages = [];
         }),
       setMessagesToSend: (num) => set({ messagesToSend: num }),
@@ -138,7 +132,7 @@ export const useStore = create(
     }
   )
 );
-export const usePerson = (id?: string) => useStore((s) => s.persons[id || s.personId]);
+export const usePerson = (id?: string) => useStore((s) => s.persons[id || s.personId || ""]);
 export const useMessages = (id?: string) => usePerson(id)?.messages || [];
 export const usePrompt = (id?: string) => {
   const person = usePerson(id);

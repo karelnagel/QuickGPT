@@ -1,4 +1,3 @@
-import { SettingsWrapper } from "../components/SettingsWrapper";
 import { isValidKey } from "../helpers";
 import { TextSize, useStore } from "../hooks/useStore";
 
@@ -9,44 +8,44 @@ export const Settings = () => {
   const setTextSize = useStore((s) => s.setTextSize);
   const messagesToSend = useStore((s) => s.messagesToSend);
   const setMessagesToSend = useStore((s) => s.setMessagesToSend);
-
+  const sizes = Object.entries(TextSize);
   return (
-    <SettingsWrapper title="Settings">
-      <div className="form-control w-full">
-        <label className="label">
-          <span className="label-text">OpenAI API key, if you want to use your own</span>
-        </label>
-        <input type="text" value={apiKey} onChange={(e) => setApiKey(e.target.value)} className="input" placeholder="sk-..." />
-        {apiKey && !isValidKey(apiKey) && (
-          <label className="label">
-            <span className="label-text-alt text-error">Invalid key, should start with 'sk-' and be more than 30 chars long</span>
-          </label>
-        )}
+    <div className=" p-3 items-center flex flex-col space-y-3 text-center text-sm border-t">
+      <div className="w-full space-y-2">
+        <p>History to send</p>
+        <div className="grid grid-cols-5 w-full space-x-3">
+          <input
+            type="range"
+            min={0}
+            step={1}
+            max={100}
+            value={messagesToSend === undefined ? 100 : messagesToSend}
+            onChange={(e) => setMessagesToSend(e.target.value === "100" ? undefined : Number(e.target.value))}
+            className="range range-sm range-primary col-span-4"
+          />
+          <p>{messagesToSend === undefined ? "All" : messagesToSend === 0 ? "None" : messagesToSend}</p>
+        </div>
       </div>
-      <div className="form-control w-full">
-        <label className="label">
-          <span className="label-text">How many messages should be sent to ChatGPT (less = cheaper costs, empty will send all)</span>
-        </label>
-        <input
-          type="number"
-          value={messagesToSend === undefined ? "" : messagesToSend}
-          onChange={(e) => setMessagesToSend(e.target.value === "" ? undefined : Number(e.target.value))}
-          className="input"
-          placeholder="Will send all messages"
-        />
+      <div className="w-full space-y-2">
+        <p>Text Size</p>
+        <div className="grid grid-cols-5 w-full space-x-3">
+          <input
+            type="range"
+            min={0}
+            step={1}
+            max={sizes.length - 1}
+            className="range range-sm range-primary col-span-4"
+            value={sizes.findIndex((s) => s[0] === textSize)}
+            onChange={(e) => setTextSize(sizes[Number(e.target.value) || 0][0] as TextSize)}
+          />
+          <p>{TextSize[textSize]}</p>
+        </div>
       </div>
-      <div className="form-control w-full">
-        <label className="label">
-          <span className="label-text">Message text size</span>
-        </label>
-        <select value={textSize} onChange={(e) => setTextSize(e.target.value as TextSize)} className="select">
-          {Object.entries(TextSize).map(([key, value]) => (
-            <option key={key} value={key}>
-              {value}
-            </option>
-          ))}
-        </select>
+      <div className=" w-full space-y-2">
+        <p>OpenAI API key</p>
+        <input type="text" value={apiKey} onChange={(e) => setApiKey(e.target.value)} className="input input-sm input-primary" placeholder="sk-..." />
+        {apiKey && !isValidKey(apiKey) && <span className="label-text-alt text-error">Invalid key</span>}
       </div>
-    </SettingsWrapper>
+    </div>
   );
 };

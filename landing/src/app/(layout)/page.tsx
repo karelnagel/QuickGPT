@@ -5,13 +5,13 @@ import { Question } from "~/components/Question";
 
 export default function Page() {
   return (
-    <div className="w-full text-center md:text-left">
+    <div className="w-full text-center text-white md:text-left">
       <div className="mx-auto my-16 flex w-full max-w-screen-lg flex-col items-center justify-between md:flex-row">
         <div className="max-w-xl space-y-6">
           <h1 className="text-title text-[40px] font-bold leading-[1.1]  md:text-[60px]">
             Experience the Power of ChatGPT on Your Desktop
           </h1>
-          <h2 className="text-xl leading-[1.4]">
+          <h2 className="text-xl leading-[1.4] ">
             The Fastest, Most User-Friendly ChatGPT Application - And It's Open
             Source! Designed for Mac, Windows and Linux.
           </h2>
@@ -20,14 +20,14 @@ export default function Page() {
             <a
               href={github}
               target="_blank"
-              className="btn-outline btn normal-case"
+              className="btn-outline btn border-white normal-case text-white"
             >
               GitHub
             </a>
           </div>
         </div>
-        <div className="group relative hidden h-[550px] w-[350px] shrink-0 flex-col items-end md:flex">
-          <p className="absolute top-0 -left-60 rotate-12 text-4xl italic">
+        <div className="group relative hidden h-[600px] w-[350px] shrink-0 flex-col items-end md:flex">
+          <p className="absolute top-0 -left-52 rotate-12 text-3xl italic">
             {"Try It Here ->"}
           </p>
           <iframe

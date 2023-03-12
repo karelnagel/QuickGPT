@@ -20,10 +20,9 @@ export const useGPT = () => {
     let result = "";
     addMessage({ content: message, role: "user", id: getRandomId() });
     addMessage({ id, role: "assistant", content: "" });
-    console.log(chat);
     const messages = [
       { role: "user", content: prompt },
-      ...Message.array().parse([...chat].splice(-(messagesToSend || 0))),
+      ...Message.array().parse([...chat].splice(-(messagesToSend || 0))), // if ===0, its wrong
       { role: "user", content: message },
     ];
 

@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
+import { NotificationType } from "../components/Notification";
 import { defaultPersons, defaultPrompt } from "../config";
 
 const defAllPersons = Object.keys(defaultPersons);
@@ -31,6 +32,10 @@ export const TextSize = {
 export type TextSize = keyof typeof TextSize;
 
 export type StoreType = {
+  notification?: NotificationType;
+  setNotification: (alert?: NotificationType) => void;
+  hideNotification: () => void;
+
   textSize: TextSize;
   setTextSize: (size: TextSize) => void;
 
@@ -67,12 +72,19 @@ export type StoreType = {
 export const useStore = create(
   persist(
     immer<StoreType>((set, get) => ({
+      notification: undefined,
+      setNotification: (notification) => set({ notification }),
+      hideNotification: () =>
+        set((s) => {
+          if (s.notification) s.notification.hide = true;
+        }),
+
       showEditPerson: false,
       setShowEditPerson: () => set((s) => ({ showEditPerson: !s.showEditPerson })),
 
       stream: true,
       setStream: (s) => set({ stream: s }),
-      
+
       showSidePanel: true,
       setShowSidePanel: () => set((s) => ({ showSidePanel: !s.showSidePanel })),
 

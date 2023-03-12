@@ -1,6 +1,6 @@
 import { useMessages, usePrompt, useStore } from "./useStore";
 import z from "zod";
-import { getRandomId, isTauri } from "../helpers";
+import { getRandomId, getServerUrl } from "../helpers";
 
 const Message = z.object({
   content: z.string(),
@@ -27,7 +27,7 @@ export const useGPT = () => {
       { role: "user", content: message },
     ];
 
-    const url = apiKey ? "https://api.openai.com/v1/chat/completions" : isTauri() ? (import.meta as any).env.VITE_API_URL : "/api/gpt";
+    const url = apiKey ? "https://api.openai.com/v1/chat/completions" : `${getServerUrl()}/gpt`;
     const res = await fetch(url, {
       method: "POST",
       headers: {

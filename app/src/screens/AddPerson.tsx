@@ -16,7 +16,7 @@ export const AddPerson = () => {
     <div className="flex flex-col space-y-1 p-2 overflow-auto">
       {prompts &&
         Object.entries(prompts).map(([id, p]) => (
-          <div>
+          <div className="space-y-1">
             <p>{id}</p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {p?.map((person) => (

@@ -11,7 +11,7 @@ export const usePrompts = () => {
         .then((data: Prompt[]) => {
           const prompts = data.reduce((acc, person) => {
             acc[person.type] = acc[person.type] || [];
-            acc[person.type].push(person);
+            acc[person.type]?.push(person);
             return acc;
           }, {} as Record<string, Prompt[]>);
           setPrompts(prompts);

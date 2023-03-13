@@ -32,24 +32,10 @@ fn main() {
             } => {
                 let window = app.get_window("main").unwrap();
                 if window.is_visible().unwrap() {
-                    spotlight::show_spotlight(window);
-                } else {
                     spotlight::hide_spotlight(window);
+                } else {
+                    spotlight::show_spotlight(window);
                 }
-            }
-            SystemTrayEvent::RightClick {
-                position: _,
-                size: _,
-                ..
-            } => {
-                println!("system tray received a right click");
-            }
-            SystemTrayEvent::DoubleClick {
-                position: _,
-                size: _,
-                ..
-            } => {
-                println!("system tray received a double click");
             }
             SystemTrayEvent::MenuItemClick { id, .. } => match id.as_str() {
                 "quit" => {
@@ -63,10 +49,7 @@ fn main() {
                     )
                     .unwrap();
                 }
-                "hide" => {
-                    let window = app.get_window("main").unwrap();
-                    window.hide().unwrap();
-                }
+
                 _ => {}
             },
             _ => {}

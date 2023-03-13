@@ -24,7 +24,6 @@ pub fn init_spotlight_window(window: Window<Wry>) {
 
 #[tauri::command]
 pub fn show_spotlight(window: Window<Wry>) {
-
     #[cfg(target_os = "macos")]
     show_macspot(window.clone());
 

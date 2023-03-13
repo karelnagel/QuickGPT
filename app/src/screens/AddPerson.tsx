@@ -1,19 +1,38 @@
 import { useState } from "react";
 import { defaultPrompt } from "../config";
 import { getRandomId } from "../helpers";
-import { usePeople } from "../hooks/usePeople";
+import { usePrompts } from "../hooks/usePrompts";
 import { useStore } from "../hooks/useStore";
 
 export const AddPerson = () => {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [prompt, setPrompt] = useState("");
-
   const addPerson = useStore((s) => s.addPerson);
-  const people = usePeople();
+  usePrompts();
+  const prompts = useStore((s) => s.prompts);
 
   return (
     <div className="flex flex-col space-y-1 p-2 overflow-auto">
+      {prompts &&
+        Object.entries(prompts).map(([id, p]) => (
+          <div>
+            <p>{id}</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {p?.map((person) => (
+                <div
+                  key={person.id}
+                  className=" p-2 bg-base-300 rounded-lg cursor-pointer flex space-x-2 items-center"
+                  onClick={() => addPerson({ ...person, messages: [] })}
+                >
+                  {person.image && <img src={person.image} className="h-6 w-6 rounded-full object-cover" />}
+                  <p>{person.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      <div className="divider py-8">or Create New</div>
       <div className="form-control w-full">
         <label className="label">
           <span className="label-text">Name</span>
@@ -40,25 +59,6 @@ export const AddPerson = () => {
       <button className="btn btn-sm btn-primary" onClick={() => addPerson({ id: getRandomId(), name, prompt, image, messages: [] })}>
         Add
       </button>
-      <div className="divider py-8">or Use Existing</div>
-      {people &&
-        Object.entries(people).map(([id, p]) => (
-          <div>
-            <p>{id}</p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              {p?.map((person) => (
-                <div
-                  key={person.id}
-                  className=" p-2 bg-base-300 rounded-lg cursor-pointer flex space-x-2 items-center"
-                  onClick={() => addPerson({ ...person, messages: [] })}
-                >
-                  {person.image && <img src={person.image} className="h-6 w-6 rounded-full object-cover" />}
-                  <p>{person.name}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
     </div>
   );
 };

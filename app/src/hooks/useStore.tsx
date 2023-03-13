@@ -1,8 +1,18 @@
+import { z } from "zod";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { NotificationType } from "../components/Notification";
 import { defaultPersons, defaultPrompt } from "../config";
+
+export const Prompt = z.object({
+  id: z.string(),
+  name: z.string(),
+  prompt: z.string().optional(),
+  image: z.string().url().optional(),
+  type: z.string(),
+});
+export type Prompt = z.infer<typeof Prompt>;
 
 const defAllPersons = Object.keys(defaultPersons);
 const defaultPerson = defAllPersons[0] || "";
@@ -32,6 +42,9 @@ export const TextSize = {
 export type TextSize = keyof typeof TextSize;
 
 export type StoreType = {
+  prompts: { [type: string]: Prompt[] };
+  setPrompts: (prompts: { [type: string]: Prompt[] }) => void;
+
   notification?: NotificationType;
   setNotification: (alert?: NotificationType) => void;
   hideNotification: () => void;
@@ -72,6 +85,9 @@ export type StoreType = {
 export const useStore = create(
   persist(
     immer<StoreType>((set, get) => ({
+      prompts: {},
+      setPrompts: (prompts) => set({ prompts }),
+
       notification: undefined,
       setNotification: (notification) => set({ notification }),
       hideNotification: () =>

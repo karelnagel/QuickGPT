@@ -3,10 +3,13 @@ import { open } from "@tauri-apps/api/shell";
 import { useStore } from "../hooks/useStore";
 import { useState } from "react";
 
+import remarkGfm from "remark-gfm";
+
 export const Markdown = ({ children }: { children: string }) => {
   const textSize = useStore((s) => s.textSize);
   return (
     <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
       className={`prose ${textSize} max-w-full`}
       components={{
         a: ({ href, children, className, style }) => {

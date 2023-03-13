@@ -2,6 +2,7 @@ import { useIsClient } from "./hooks/useIsClient";
 import { Shortcuts } from "./components/Shortcuts";
 import { Home } from "./screens/Home";
 import { Notification } from "./components/Notification";
+import { Update } from "./components/Update";
 
 export default function App() {
   const isCLient = useIsClient();
@@ -9,8 +10,9 @@ export default function App() {
   if (!isCLient) return <div>Loading...</div>;
   return (
     <>
-      <Home />
+      <Update />
       <Notification />
+      <Home />
       <Shortcuts />
     </>
   );

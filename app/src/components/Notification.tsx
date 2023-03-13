@@ -24,7 +24,7 @@ export const Notification = () => {
   if (!notification || notification.hide) return null;
   return (
     <div
-      className="absolute top-0 left-0 p-2 text-white w-full text-center flex items-center justify-between text-sm opacity-90 cursor-pointer"
+      className="p-2 text-white w-full text-center flex items-center justify-between text-sm cursor-pointer"
       style={{ background: notification.color }}
       onClick={hide}
     >

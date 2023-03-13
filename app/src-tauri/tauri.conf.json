@@ -45,7 +45,7 @@
       "endpoints": [
         "https://quickgpt.xyz/api/update"
       ],
-      "dialog": true,
+      "dialog": false,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDREN0MzNDA0Q0RFMjlCRDQKUldUVW0rTE5CRFI4VFYyMHhCYjFzMjdGb2swczFBTmNUQVczUll4MFQvRDg3cnJqRGdHYjFGWmcK"
     },
     "windows": [

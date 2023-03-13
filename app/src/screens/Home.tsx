@@ -31,7 +31,7 @@ const SidePanel = () => {
     <div
       className={`bg-base-300 ${
         personId ? "hidden" : "flex"
-      } md:flex w-full md:w-[300px] absolute md:relative h-full flex flex-col justify-between overflow-hidden `}
+      } md:flex w-full md:w-[230px] absolute md:relative h-full flex flex-col justify-between overflow-hidden shrink-0`}
     >
       <div className="flex flex-col overflow-auto">
         <div className="h-12 w-full p-2">
@@ -80,7 +80,7 @@ const OnePerson = ({ id }: { id: string }) => {
       onClick={() => setPersonId(person.id)}
       className={`cursor-pointer flex space-x-2 p-2 ${person.id === personId ? "bg-primary" : "hover:bg-primary hover:bg-opacity-40"}`}
     >
-      <img src={person.image || defaultPersonImage} alt={person.name} className="h-10 w-10 object-cover rounded-full" />
+      <img src={person.image || defaultPersonImage} alt={person.name} className="h-10 w-10 object-cover shrink-0 rounded-full" />
       <div className="flex flex-col overflow-hidden justify-between">
         <p className="whitespace-nowrap">{person.name}</p>
         <p className="whitespace-nowrap text-sm">{[...person.messages].pop()?.content}</p>

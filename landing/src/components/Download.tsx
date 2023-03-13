@@ -23,7 +23,7 @@ export const Download = ({ className }: { className?: string }) => {
           tabIndex={0}
           className="btn-gradient btn flex w-full flex-nowrap space-x-2 normal-case"
         >
-          <IoMdArrowRoundDown className="text-3xl" />
+          <IoMdArrowRoundDown className="text-2xl" />
           <p className="whitespace-nowrap">{devices[device].title}</p>
         </label>
       </a>

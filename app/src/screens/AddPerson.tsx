@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { defaultPrompt } from "../config";
 import { getRandomId } from "../helpers";
+import { usePeople } from "../hooks/usePeople";
 import { useStore } from "../hooks/useStore";
 
 export const AddPerson = () => {
@@ -9,20 +10,21 @@ export const AddPerson = () => {
   const [prompt, setPrompt] = useState("");
 
   const addPerson = useStore((s) => s.addPerson);
-  const setPersonId = useStore((s) => s.setPersonId);
+  const people = usePeople();
+
   return (
-    <div className="flex flex-col space-y-2 p-2">
+    <div className="flex flex-col space-y-1 p-2 overflow-auto">
       <div className="form-control w-full">
         <label className="label">
           <span className="label-text">Name</span>
         </label>
-        <input value={name} onChange={(e) => setName(e.target.value)} className="input" placeholder="Name" />
+        <input value={name} onChange={(e) => setName(e.target.value)} className="input input-sm" placeholder="Name" />
       </div>
       <div className="form-control w-full">
         <label className="label">
           <span className="label-text">Image</span>
         </label>
-        <input value={image} onChange={(e) => setImage(e.target.value)} className="input" placeholder="Image URL" />
+        <input value={image} onChange={(e) => setImage(e.target.value)} className="input input-sm" placeholder="Image URL" />
       </div>
       <div className="form-control w-full">
         <label className="label">
@@ -31,16 +33,32 @@ export const AddPerson = () => {
         <textarea
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
-          className="textarea min-h-[200px]"
+          className="textarea textarea-sm min-h-[200px]"
           placeholder={prompt || defaultPrompt(name)}
         />
       </div>
       <button className="btn btn-sm btn-primary" onClick={() => addPerson({ id: getRandomId(), name, prompt, image, messages: [] })}>
-        Save
+        Add
       </button>
-      <button className="btn btn-sm" onClick={() => setPersonId()}>
-        Back
-      </button>
+      <div className="divider py-8">or Use Existing</div>
+      {people &&
+        Object.entries(people).map(([id, p]) => (
+          <div>
+            <p>{id}</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {p?.map((person) => (
+                <div
+                  key={person.id}
+                  className=" p-2 bg-base-300 rounded-lg cursor-pointer flex space-x-2 items-center"
+                  onClick={() => addPerson({ ...person, messages: [] })}
+                >
+                  {person.image && <img src={person.image} className="h-6 w-6 rounded-full object-cover" />}
+                  <p>{person.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
     </div>
   );
 };

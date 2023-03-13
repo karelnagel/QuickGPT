@@ -16,9 +16,6 @@ code {
   @apply text-primary;
 }
 
-.btn {
-  @apply rounded-full text-[18px] normal-case md:text-[20px];
-}
 
 .btn-gradient {
   @apply border-none bg-gradient-to-r from-primary to-secondary text-white;

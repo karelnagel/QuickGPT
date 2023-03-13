@@ -6,7 +6,7 @@ import { Question } from "~/components/Question";
 export default function Page() {
   return (
     <div className="w-full text-center  md:text-left">
-      <div className="mx-auto my-16 flex w-full max-w-screen-lg flex-col items-center justify-between md:flex-row text-white">
+      <div className="mx-auto my-10 flex w-full max-w-screen-lg flex-col-reverse items-center justify-between text-white md:my-36 md:flex-row">
         <div className="max-w-xl space-y-6">
           <h1 className="text-title text-[40px] font-bold leading-[1.1]  md:text-[60px]">
             Experience the Power of ChatGPT on Your Desktop
@@ -26,17 +26,16 @@ export default function Page() {
             </a>
           </div>
         </div>
-        <div className="group relative hidden h-[600px] w-[350px] shrink-0 flex-col items-end md:flex">
-          <p className="absolute top-0 -left-52 rotate-12 text-3xl italic">
-            {"Try It Here ->"}
-          </p>
-          <iframe
-            src="/app"
-            className=" h-full w-full rounded-xl"
-            title="app"
+        <div className="group flex shrink-0 flex-col items-end px-14 md:w-[440px] md:px-0">
+          <video
+            src="/recording.mov"
+            className=" w-full rounded-lg"
+            autoPlay
+            muted
+            disablePictureInPicture
           />
           <Link href="/app" className="invisible text-sm group-hover:visible">
-            Open in fullscreen
+            Open Online App
           </Link>
         </div>
       </div>

@@ -44,7 +44,7 @@ export const Settings = () => {
 
       <div className=" w-full space-y-2">
         <label className="label-text">OpenAI API key</label>
-        <input type="text" value={apiKey} onChange={(e) => setApiKey(e.target.value)} className="input input-sm input-primary" placeholder="sk-..." />
+        <input type="password" value={apiKey} onChange={(e) => setApiKey(e.target.value)} className="input input-sm input-primary" placeholder="sk-..." />
         {apiKey && !isValidKey(apiKey) && <span className="label-text-alt text-error">Invalid key</span>}
       </div>
     </div>

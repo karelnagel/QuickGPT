@@ -8,7 +8,7 @@ export const config = {
 export default async function GPT(req: NextRequest) {
   if (req.method === "POST") {
     const body = JSON.parse(await req.text());
-    const { messages, stream } = body;
+    const { messages, stream, model } = body;
     const url = "https://api.openai.com/v1/chat/completions";
     const res = await fetch(url, {
       method: "POST",

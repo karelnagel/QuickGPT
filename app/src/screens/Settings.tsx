@@ -1,5 +1,5 @@
 import { isValidKey } from "../helpers";
-import { TextSize, useStore } from "../hooks/useStore";
+import { Model, TextSize, useStore } from "../hooks/useStore";
 
 export const Settings = () => {
   const apiKey = useStore((s) => s.apiKey);
@@ -41,11 +41,28 @@ export const Settings = () => {
           <input type="checkbox" checked={stream} onChange={(e) => setStream(!stream)} className="toggle" />
         </div>
       </div>
-
-      <div className=" w-full space-y-2">
-        <label className="label-text">OpenAI API key</label>
-        <input type="password" value={apiKey} onChange={(e) => setApiKey(e.target.value)} className="input input-sm input-primary" placeholder="sk-..." />
-        {apiKey && !isValidKey(apiKey) && <span className="label-text-alt text-error">Invalid key</span>}
+      <div className="grid grid-cols-2 gap-2">
+        <div className="flex flex-col items-center justify-between space-y-1">
+          <label className="label-text">Model</label>
+          <select value={textSize} onChange={(e) => setTextSize(e.target.value as TextSize)} className="select select-sm">
+            {Object.entries(Model).map(([key, value]) => (
+              <option key={key} value={key}>
+                {value}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className=" w-full space-y-2">
+          <label className="label-text">API key</label>
+          <input
+            type="password"
+            value={apiKey}
+            onChange={(e) => setApiKey(e.target.value)}
+            className="input input-sm input-primary"
+            placeholder="sk-..."
+          />
+          {apiKey && !isValidKey(apiKey) && <span className="label-text-alt text-error">Invalid key</span>}
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useMessages, usePrompt, useStore } from "./useStore";
+import { MessageType, useMessages, usePrompt, useStore } from "./useStore";
 import z from "zod";
 import { getRandomId, getServerUrl } from "../helpers";
 
@@ -15,14 +15,15 @@ export const useGPT = () => {
   const messagesToSend = useStore((s) => s.messagesToSend);
   const prompt = usePrompt();
   const stream = useStore((s) => s.stream);
+  const model = useStore((s) => s.model);
 
   const call = async (message: string) => {
     const id = getRandomId();
     let result = "";
     addMessage({ content: message, role: "user", id: getRandomId() });
     addMessage({ id, role: "assistant", content: "" });
-    const messages = [
-      { role: "user", content: prompt },
+    const messages: Partial<MessageType>[] = [
+      { role: "system", content: prompt },
       ...Message.array().parse([...chat].splice(-(messagesToSend || 0))), // if ===0, its wrong
       { role: "user", content: message },
     ];
@@ -35,7 +36,7 @@ export const useGPT = () => {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo",
+        model,
         messages,
         stream,
       }),

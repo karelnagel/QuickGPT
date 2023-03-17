@@ -10,7 +10,7 @@ export const Markdown = ({ children }: { children: string }) => {
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
-      className={`prose ${textSize} max-w-full`}
+      className={`prose ${textSize} max-w-none w-full`}
       components={{
         a: ({ href, children, className, style }) => {
           return (
@@ -19,9 +19,12 @@ export const Markdown = ({ children }: { children: string }) => {
             </button>
           );
         },
+        pre: ({ children }) => {
+          return <pre className="max-w-[600px]">{children}</pre>;
+        },
         code: ({ children }) => {
           return (
-            <code className="group relative w-full overflow-auto">
+            <code className="group relative overflow-auto">
               <Copy value={children} />
               {children}
             </code>

@@ -41,6 +41,12 @@ export const TextSize = {
 };
 export type TextSize = keyof typeof TextSize;
 
+export const Model = {
+  "gpt-3.5-turbo": "GPT 3.5",
+  "gpt-4": "GPT 4",
+};
+export type Model = keyof typeof Model;
+
 export type StoreType = {
   prompts: { [type: string]: Prompt[] };
   setPrompts: (prompts: { [type: string]: Prompt[] }) => void;
@@ -80,6 +86,8 @@ export type StoreType = {
 
   messagesToSend?: number;
   setMessagesToSend: (num?: number) => void;
+  model: Model;
+  setModel: (model: Model) => void;
 };
 
 export const useStore = create(
@@ -166,6 +174,8 @@ export const useStore = create(
           if (person) person.messages = [];
         }),
       setMessagesToSend: (num) => set({ messagesToSend: num }),
+      model: "gpt-3.5-turbo",
+      setModel: (model) => set({ model }),
     })),
     {
       name: "quickgpt",

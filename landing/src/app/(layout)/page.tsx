@@ -2,6 +2,7 @@ import { faq, features, github } from "~/config";
 import { Download } from "~/components/Download";
 import Link from "next/link";
 import { Question } from "~/components/Question";
+import Image from "next/image";
 
 export default function Page() {
   return (
@@ -27,12 +28,12 @@ export default function Page() {
           </div>
         </div>
         <div className="group flex shrink-0 flex-col items-end px-14 md:w-[440px] md:px-0">
-          <video
-            src="/recording.mov"
+          <Image
+            alt="recording"
+            src="/recording.gif"
             className=" w-full rounded-lg"
-            autoPlay
-            muted
-            disablePictureInPicture
+            width={440}
+            height={300}
           />
           <Link href="/app" className="invisible text-sm group-hover:visible">
             Open Online App

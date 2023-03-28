@@ -1,8 +1,14 @@
 name: "publish"
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
+    paths:
+      - app/package.json
+  pull_request:
+    branches: ["main"]
+    paths:
+      - app/package.json
+
 jobs:
   create-release:
     permissions:
